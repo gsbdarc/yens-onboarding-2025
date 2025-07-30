@@ -24,6 +24,7 @@ By the end of today you will be able to:
 - Install and link Jupyter kernels to your custom environment.
 - Run code via Python scripts and Jupyter notebooks on the Yens.
 - Use environment variables securely (e.g., for API keys).
+- Explore paths and reproducibility on shared systems.
 
 ---
 
@@ -45,7 +46,8 @@ A legend we will use:
 > If you are a Mac or Linux user, you can use the native terminal for these exercises. 
 {: .important }
 
-If you are a Windows user, you can use Git Bash to run these commands.
+> If you are a Windows user, you can use Git Bash to run these commands.
+{: .important }
 
 To SSH from your terminal (replace `<SUNetID>` with your SUNet ID; don't type the `<`, `>` symbols):
 
@@ -87,6 +89,24 @@ scp ~/Desktop/hello_yens.txt <SUNetID>@yen.stanford.edu:~
 You’ll be prompted for Duo authentication. After logging in, check that the file was copied correctly by SSHing into the Yens and running `ls` in your home directory.
 🟩/🟥
 
+> To copy a folder, use a `-r` (recursive) flag with `scp`.
+{: .tip }
+
+Open a new terminal on your local machine (not connected to the Yens).
+
+Make a new **folder** where you can find it  (e.g., your Desktop). For example, name it `test_folder_from_local`. 
+
+Put a file in the folder (text, image, doc, etc). Let's take a screen shot of your screen and move it into this new folder. 
+
+Then, we will upload this folder from your laptop to the cluster using `scp` (run from your **local** terminal, not the Yens):
+
+```bash
+scp -r ~/Desktop/test_folder_from_local <SUNetID>@yen.stanford.edu:~
+```
+You’ll be prompted for Duo authentication. After logging in, check that the folder was copied correctly by SSHing into the Yens and running `ls` in your home directory.
+🟩/🟥
+
+
 ## Access the Yens on the web 
 To access JupyterHub, choose any of the following:
 
@@ -95,6 +115,19 @@ To access JupyterHub, choose any of the following:
 - <a href="https://yen3.stanford.edu" target="_blank">`yen3` https://yen3.stanford.edu</a>
 - <a href="https://yen4.stanford.edu" target="_blank">`yen4` https://yen4.stanford.edu</a>
 - <a href="https://yen5.stanford.edu" target="_blank">`yen5` https://yen5.stanford.edu</a>
+
+Let's navigate by double clicking on folders to find an image we copied from our local machine. 
+
+> You can double click on it to view it natively in JupyterHub.
+{: .tip }
+
+
+
+
+## Understanding paths and modules on the Yens
+TODO
+
+✏️ All this path and version stuff is important for reproducibility. Let’s take a beat to think through what reproducibility means in research.
 
 
 ## 💻 Copy a repo with exercises 
@@ -173,8 +206,23 @@ Run the following commands in the `~/yens-onboarding-2025/exercises` directory:
 ```
 /usr/bin/python3 -m venv venv
 source venv/bin/activate
+```
+This runs a script that’s located in the `./venv/bin` directory called `activate`. The `bin` directory doesn’t mean like, a literal bin. It’s short for `bin`ary, things that can be executed as programs, as opposed to data or configuration files.
+
+> You will know the activation was successful when you see `(venv)` at the beginning of your terminal prompt. This indicates that the virtual environment is active.
+{: .tip}
+
+Your environment is activated, so now you can install packages using `pip`. Let’s try it.
+```
 pip install -r requirements.txt
 ```
+
+These libraries are now installed in *this* environment. You can load the packages while the environment is activated, but it’s not installed for anyone else. Test it out! Try importing `numpy` and `dotenv` in the Jupyter terminal with your virtual environment activated and deactivated. 
+
+> 🐍 For new python users, type `python3` to start a python console then in the console type `import numpy`. What happens when you try to import a package with the virtual environment activated and deactivated?
+{: .tip }
+
+🟩/🟥
 
 ## 💻 Run python script using virtual environment
 
