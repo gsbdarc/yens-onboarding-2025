@@ -1,4 +1,3 @@
-
 ---
 title: Day 2 — Running and Scaling Jobs on the Yens
 layout: page
@@ -336,5 +335,37 @@ This file contains:
 
 > This is your first file to check when things don’t work — start with the `.out` file.
 {: .tip }
+
+✅ Recap
+You’ve now:
+
+- Written a Slurm script to run a Python job using multiple CPU cores
+
+- Activated a virtual environment in a Slurm context
+
+- Used job output logs to track success or failure
+
+- Submitted, monitored, and inspected a real cluster job
+
+Next up: handling jobs that fail, adding fault tolerance, and running many jobs at once using arrays.
+
+
+### 💻 Exercise: Debugging Cluster Jobs
+❓ What happens if your job crashes?
+
+❓ What information is in the Slurm log files?
+
+❓ How do you rerun failed jobs?
+
+- Submit `fix_me.slurm`, `fix_me_2.slurm`, or `fix_me_3.slurm`.
+
+- Look at logs
+
+- Fix it and resubmit
+
+- Bonus: debug `extract_form_3_one_file_broken.slurm`
+
+- 🟩/🟥
+
 
 
