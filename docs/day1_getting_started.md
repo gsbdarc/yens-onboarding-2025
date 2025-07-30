@@ -14,36 +14,48 @@ This first session introduces you to Stanford GSB’s research computing cluster
 
 ---
 
-## Learning Goals
+## Learning goals
 
 By the end of today you will be able to:
 
 - Connect to the Yens via SSH and JupyterHub.
 - Navigate the file system using basic shell commands.
 - Create and activate Python virtual environments.
+- Install and link Jupyter kernels to your custom environment.
 - Run code via Python scripts and Jupyter notebooks on the Yens.
 - Use environment variables securely (e.g., for API keys).
-- Install and link Jupyter kernels to your custom environment.
 
 ---
 
-## Part 1: Connecting to the Yens
+A legend we will use:
+
+💻: means “use terminal on the Yens”
+✏️ : means “we will white board this”
+🐍: means "Python script"
+❓: question for class. Feel free to shout out the answer
+🟩/🟥: means “put up the colored sticky once you finish the exercise / ask for help”
+
+
+## Connecting to the Yens
 {: .important} If you are a Mac or Linux user, you can use the native terminal for these exercises.
 
 {: .important} If you are a Windows user, you can use Git Bash to run these commands.
 
 
-To SSH from your terminal (replace `<SUNetID>`):
+To SSH from your terminal (replace `<SUNetID>` with your SUNet ID; don't type the `<`, `>` symbols):
 
 ```bash
 ssh <SUNetID>@yen.stanford.edu
 ```
 You’ll be prompted for Duo authentication.
 
+🟩/🟥
 
-### Command Line Basics
+### 💻 Command line basics
 
-Explore your environment
+When you `ssh` to the Yens, you are in your "home" directory. 
+
+Let's explore your environment:
 
 ```
 pwd                   # Show your current directory
@@ -55,14 +67,22 @@ touch test.py         # Create a blank file
 rm test.py            # Be careful! This deletes the file
 ```
 
-Try uploading a file from your laptop to the cluster using scp (run from your local terminal):
 
-```
-scp path/to/file.txt <SUNetID>@yen.stanford.edu:~
-```
-You’ll be prompted for Duo authentication.
+### Copying data to the Yens
 
-## Part 2: Web-based Computing 
+Open a new terminal on your local machine (not connected to the Yens).
+
+Make a new file in the text editor of your choice and save it where you can find it  (e.g., your Desktop). For example, name it `hello_yens.txt`. 
+
+Then, we will upload this file from your laptop to the cluster using `scp` (run from your **local** terminal, not the Yens):
+
+```bash
+scp ~/Desktop/hello_yens.txt <SUNetID>@yen.stanford.edu:~
+```
+You’ll be prompted for Duo authentication. After logging in, check that the file was copied correctly by SSHing into the Yens and running `ls` in your home directory.
+🟩/🟥
+
+## Access the Yens on the web 
 To access JupyterHub, choose any of the following:
 
 - <a href="https://yen1.stanford.edu" target="_blank">`yen1` https://yen1.stanford.edu</a>
@@ -71,34 +91,149 @@ To access JupyterHub, choose any of the following:
 - <a href="https://yen4.stanford.edu" target="_blank">`yen4` https://yen4.stanford.edu</a>
 - <a href="https://yen5.stanford.edu" target="_blank">`yen5` https://yen5.stanford.edu</a>
 
-## Part 3: Create a Python Virtual Environment
-  1. Connect to the Yens either via a terminal in JupyterHub or via SSH.
 
-  2. Clone the repo and change directories into it on the Yens:
-    ```
-    git clone https://github.com/gsbdarc/yens-onboarding-2025.git
-    cd yens-onboarding-2025/exercises
-    ``` 
+## 💻 Copy a repo with exercises 
 
-  -❓ What is requirements.txt file?
+```
+git clone https://github.com/gsbdarc/yens-onboarding-2025.git 
+```
 
-  -❓ Why is it useful?
+Navigate to the `exercises` directory:
 
-### Exercise 1: Create and activate a virtual environment
-Let’s make a virtual environment from requirements.txt:
+```
+cd yens-onboarding-2025/exercises
+```
+🟩/🟥
+
+## Run scripts from the terminal
+
+💻 Create a Python script:
+
+```
+touch test_script.py
+```
+
+Edit this file in Jupyter Text File Editor.
+
+The content for `test_script.py`:
+
+```python
+print("Hello from the Yens!")
+```
+
+Save this 🐍 file. 
+
+💻 Run the script:
+
+```
+python3 test_script.py
+```
+
+🟩/🟥
+
+
+## How to run python scripts that import libraries
+Let’s look at the script called `extract_form_3_one_file.py` inside the `scripts` directory.
+
+```bash
+cat scripts/extract_form_3_one_file.py
+```
+
+❓: What is the script doing?
+
+
+Before we can run this script, every user needs to have packages that the script imports installed. This is true for other languages like R and Julia as well.
+
+  1. You should have a terminal connected to the Yens open or terminal in JupyteHub.
+
+  2. You should be in the `~/yens-onboarding-2025/exercises` directory
+
+  3. Now that we looked at the python script, let's look at the `requirements.txt` file:
+
+  ```
+  cat requirements.txt
+  ```
+
+❓ What is requirements.txt file?
+
+❓ Why is it useful?
+
+
+
+## 💻 Create a python virtual environment
+Let’s make a virtual environment from the `requirements.txt` file:
+
+Run the following commands in the `~/yens-onboarding-2025/exercises` directory:
+
 ```
 /usr/bin/python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Exercise 2: Run python script
-Let’s look at the script called `extract_form_3_one_file.py` inside the `scripts` directory.
+## 💻 Run python script using virtual environment
 
--❓: What is the script doing?
+Run the `scripts/extract_form_3_one_file.py` script using the virtual env you just made:
 
-- Run it using the virtual env you just made
+```
+python scripts/extract_form_3_one_file.py
+``` 
 
-- ❓: What do you see?
+❓: What do you see?
+
+🟩/🟥
+
+
+## 💻 Use your python environment in Jupyter
+
+One of the packages we installed, the `ipykernel` package, provides the tools to connect your environment to Jupyter. We can create a new Jupyter kernel linked to your virtual environment. Replace `<kernel_name>` with a description name for your environment (e.g. `yens-onboarding-env`). Make sure you’re in your active venv when you run this command!
+
+```
+python -m ipykernel install --user --name=<kernel_name>
+```
+
+In the Jupyter interface, go to your `yens-onboarding-2025/exercises` folder, and start a new notebook. Name it `Test.ipynb`. Change the kernel to `yens-onboarding-env` or whatever your kernel is named.
+
+You should be able to run:
+
+```
+import dotenv
+```
+You can now run code that uses packages from your environment. If you can’t, let’s get help!
+
+🟩/🟥
+
+
+## Securely Using Environment Variables
+Let’s load your OpenAI API key (or any secret) using `dotenv`.
+
+  1. 💻 We created a hidden file to store secrets. Let's look at it:
+
+    ```
+    cat /scratch/shared/yens-onboarding-2025/.env
+    ```
+
+   2. 🐍 Load the variable in Python:
+
+   ```python
+   import os
+   from dotenv import load_dotenv
+   load_dotenv('/scratch/shared/yens-onboarding-2025/.env')
+   api_key = os.getenv("OPENAI_API_KEY")
+   ```
+
+This allows you to use secrets without hardcoding them into scripts. 
+
+
+## Summary
+You're now ready to:
+
+- Connect and move around the Yens
+
+- Create and use virtual environments
+
+- Run code from both notebooks and the terminal
+
+- Manage packages and secrets in a reproducible way
 
 
