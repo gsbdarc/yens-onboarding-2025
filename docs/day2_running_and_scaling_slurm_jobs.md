@@ -86,9 +86,9 @@ Let’s make your first slurm job script. You can do this in JupyterHub usign Te
 
   2. Start the file with the bash shebang line:
 
-    ```
-    #!/bin/bash
-    ```
+```
+#!/bin/bash
+```
 
     This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
 
