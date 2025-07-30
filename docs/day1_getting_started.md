@@ -42,13 +42,10 @@ A legend we will use:
 
 ## Connecting to the Yens
 
-```important
- If you are a Mac or Linux user, you can use the native terminal for these exercises.
-```
+> If you are a Mac or Linux user, you can use the native terminal for these exercises. 
+{: .important }
 
-```important
 If you are a Windows user, you can use Git Bash to run these commands.
-```
 
 To SSH from your terminal (replace `<SUNetID>` with your SUNet ID; don't type the `<`, `>` symbols):
 
