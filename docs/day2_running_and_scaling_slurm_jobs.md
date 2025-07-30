@@ -89,6 +89,7 @@ Let’s make your first slurm job script. You can do this in JupyterHub usign Te
     ```
     #!/bin/bash
     ```
+
     This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
 
   3. Add Slurm job configuration flags that request appropriate resources (replace `your_email` with your Stanford email):  
