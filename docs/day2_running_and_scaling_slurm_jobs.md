@@ -86,33 +86,34 @@ Let’s make your first slurm job script. You can do this in JupyterHub usign Te
 
   2. Start the file with the bash shebang line:
 
-   ```
-   #!/bin/bash
-   ```
+    ```
+    #!/bin/bash
+    ```
+    This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
 
   3. Add Slurm job configuration flags that request appropriate resources (replace `your_email` with your Stanford email):  
 
-   ```
-   #SBATCH --job-name=my-first-job
-   #SBATCH --output=my-first-job.out
-   #SBATCH --time=10:00
-   #SBATCH --mem=4G
-   #SBATCH --cpus-per-task=1
-   #SBATCH --mail-type=ALL
-   #SBATCH --mail-user=your_email@stanford.edu
-   ```
+     ```
+     #SBATCH --job-name=my-first-job
+     #SBATCH --output=my-first-job.out
+     #SBATCH --time=10:00
+     #SBATCH --mem=4G
+     #SBATCH --cpus-per-task=1
+     #SBATCH --mail-type=ALL
+     #SBATCH --mail-user=your_email@stanford.edu
+     ```
 
-  The `--output=my-first-job.out` flag tells Slurm to save all job output (printed to screen) in a file named `my-first-job.out` in the same directory (`~/yens-onboarding-2025/exercises/slurm`).
+    The `--output=my-first-job.out` flag tells Slurm to save all job outputs (printed to screen) in a text file named `my-first-job.out` in the same directory (`~/yens-onboarding-2025/exercises/slurm`).
 
   4. Finally, add a line to print a message: 
 
-  ```
-  echo "Hello there!" 
-  ```
+    ```
+    echo "Hello there!" 
+    ```
 
-  Save this file.
+    Save this file.
 
-  🟩/🟥
+    🟩/🟥
 
 ### 💻 Let’s submit it:
 
