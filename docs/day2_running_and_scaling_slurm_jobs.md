@@ -26,12 +26,16 @@ By the end of today you will be able to:
 
 ## Cluster Resources
 TODO
+
 ✏️ Interactive Yens
+
 ✏️ Yen-Slurm Cluster
 
 ## 💻 Run a mystery python script
 
-Login to the Yens. Take a note of which interactive yen (yen[1-5]) you are on. Then, open a new terminal (or second tab if using Jupyter), and connect to the **same** yen. 
+Login to the Yens.
+
+Take a note of which interactive yen (yen[1-5]) you are on. Then, open a new terminal (or second tab if using Jupyter), and connect to the **same** yen. 
 
 Now you should have two terminal both conneted to the same interactive yen. 
 
