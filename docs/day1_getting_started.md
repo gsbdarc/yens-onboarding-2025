@@ -30,17 +30,25 @@ By the end of today you will be able to:
 A legend we will use:
 
 💻: means “use terminal on the Yens”
+
 ✏️ : means “we will white board this”
+
 🐍: means "Python script"
+
 ❓: question for class. Feel free to shout out the answer
+
 🟩/🟥: means “put up the colored sticky once you finish the exercise / ask for help”
 
 
 ## Connecting to the Yens
-{: .important} If you are a Mac or Linux user, you can use the native terminal for these exercises.
 
-{: .important} If you are a Windows user, you can use Git Bash to run these commands.
+```important
+ If you are a Mac or Linux user, you can use the native terminal for these exercises.
+```
 
+```important
+If you are a Windows user, you can use Git Bash to run these commands.
+```
 
 To SSH from your terminal (replace `<SUNetID>` with your SUNet ID; don't type the `<`, `>` symbols):
 
