@@ -259,27 +259,31 @@ As we know, this script uses multiple CPU cores, so we’ll request **10 cores**
 #### About the `logs/` folder
 The line `#SBATCH --output=logs/mystery-%j.out` tells Slurm to write all job output (stdout and stderr) to a file inside the `logs/` folder. The `%j` gets replaced by the Slurm job ID, so each job has its own unique log file.
 
-  Before submitting the job, we must create the `logs` directory:
+Before submitting the job, we must create the `logs` directory:
 
-  ```
-  cd ~/yens-onboarding-2025/exercises/slurm
-  mkdir logs
-  ```
+```
+cd ~/yens-onboarding-2025/exercises/slurm
+mkdir logs
+```
 
-  We also do the following in the slurm script:
+We also do the following in the slurm script:
 
-  ```
-  source venv/bin/activate
-  ```
+```
+# Move into the correct working directory
+cd ~/yens-onboarding-2025/exercises
 
-  This activates your python virtual environment. It makes sure you are running the python script using the virtual environment we created earlier.
+# Activate your Python environment
+source venv/bin/activate
+```
+
+This activates your python virtual environment. It makes sure you are running the python script using the virtual environment we created earlier.
 
   ```
   python scripts/mystery_script.py
   ```
   This runs the actual Python script. It assumes you're inside the `exercises/` directory and that the `scripts/` subfolder is there.
 
-  > If you don't `cd` into the correct working directory, relative paths like `scripts/mystery_script.py` may fail.
+  > If you don't `cd` into the correct working directory, relative paths like `scripts/mystery_script.py` will fail.
   {: .tip }
 
 
