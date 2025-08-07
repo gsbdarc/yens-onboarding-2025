@@ -361,12 +361,14 @@ You’ve now:
 **Next up**: handling jobs that fail, adding fault tolerance, and running many jobs at once using arrays.
 
 
-### 💻 Exercise: Debugging Cluster Jobs
+### 💻 Exercise: debugging cluster jobs
 ❓ What happens if your job crashes?
 
 ❓ What information is in the Slurm log files?
 
 ❓ How do you rerun failed jobs?
+
+- Navigate to `~/yens-onboarding-2025/exercises/slurm`. 
 
 - Submit `fix_me.slurm`, `fix_me_2.slurm`, or `fix_me_3.slurm`.
 
