@@ -86,11 +86,11 @@ Let’s make your first slurm job script. You can do this in JupyterHub usign Te
 
 2. Start the file with the bash shebang line:
 
-  ```
-  #!/bin/bash
-  ```
+   ```
+   #!/bin/bash
+   ```
 
-  This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
+   This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
 
 3. Add Slurm job configuration flags that request appropriate resources (replace `your_email` with your Stanford email):  
 
@@ -128,7 +128,7 @@ You’ll see output like:
 Submitted batch job 123456
 ```
 
-The `123456` is a job ID which is unique for every cluster job. 
+The `123456` is a job ID which is unique for every job on the cluster. 
 
 ## Monitoring slurm jobs
 
@@ -165,7 +165,7 @@ Hello there!
 If you included your email in `--mail-user`, you’ll also receive an email from Slurm when the job starts and ends.
 
 ## Running a python script via slurm
-Let’s now run a real script using Slurm — and discuss **paths**, **resource requests**, and how to organize logs.
+Let’s now run a real script using Slurm — and discuss paths, resource requests, and how to organize logs.
 
 ---
 
@@ -191,7 +191,7 @@ This job will:
 
 - Run from the `~/yens-onboarding-2025/exercises/slurm` folder
 
-- Save output to `~/yens-onboarding-2025/exercises/slurm/my-first-job.out (because of `--output=my-first-job.out`) 
+- Save output to `~/yens-onboarding-2025/exercises/slurm/my-first-job.out` (because of `--output=my-first-job.out`) 
 
 
 
@@ -222,7 +222,7 @@ That line will only work if the current working directory contains the `scripts/
 - If you ran it from `slurm/`, it will fail unless you `cd ..` or change paths.
 
 ### 📝 Step 2: Create a slurm script to run `mystery_script.py`
-Let’s write a new Slurm job script that runs the Python script `scripts/mystery_script.py`.
+Let’s write a new Slurm script that runs the Python script `scripts/mystery_script.py`.
 
 As we know, this script uses multiple CPU cores, so we’ll request **10 cores**.
 
