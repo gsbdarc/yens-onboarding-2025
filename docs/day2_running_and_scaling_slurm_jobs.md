@@ -358,7 +358,7 @@ You’ve now:
 
 - Submitted, monitored, and inspected a real cluster job
 
-**Next up**: handling jobs that fail, adding fault tolerance, and running many jobs at once using arrays.
+**Next up**: handling jobs that fail, scaling your jobs, adding fault tolerance, and running many jobs at once using arrays.
 
 
 ### 💻 Exercise: debugging cluster jobs
@@ -597,6 +597,144 @@ After either job fails:
 - If a job ran out of memory, increase `#SBATCH --mem=...` to a realistic number (e.g., 2G, 4G, etc.).
 
 - If it ran out of time, increase `#SBATCH --time=...` based on how long your script actually needs (remember to use `time` interactively to measure).
+
+---
+
+
+## Submitting Your First Structured Extraction Job
+Now that you've seen how to submit a Slurm job, let’s process a real SEC Form 3 filing using OpenAI and a structured output model with Pydantic.
+
+### 🐍 View the script
+
+Let’s inspect the single-file processing script:
+
+```bash
+cat scripts/extract_form_3_one_file.py
+```
+
+You should see code that:
+
+- Loads a filing from disk
+- Defines a `Form3Filing` Pydantic model
+- Uses OpenAI to extract structured information from the text
+- Prints the extracted result as a Python dictionary
+
+### View the Slurm job script
+This Slurm script runs the code above:
+
+```
+cat slurm/extract_form_3_one_file.slurm
+```
+
+You should see:
+
+```
+#!/bin/bash
+#SBATCH --job-name=form3-one
+#SBATCH --output=logs/form3-one-%j.out
+#SBATCH --time=00:05:00
+#SBATCH --mem=4G
+#SBATCH --cpus-per-task=1
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=your_email@stanford.edu
+
+cd ~/yens-onboarding-2025/exercises
+source venv/bin/activate
+
+python scripts/extract_form_3_one_file.py
+```
+
+### ✅ Submit it!
+
+From the `exercises/` directory, run:
+
+```
+sbatch slurm/extract_form_3_one_file.slurm
+```
+
+After submission:
+
+- Monitor the job with `squeue -u $USER`
+- Check the output in `logs/` once it finishes
+
+
+
+## Scaling Up to Process Many Files
+Now let’s move from a single example to 100 filings. 
+
+We already have a file named `form_3_100.csv` in `data` directory containing 100 rows, each with a path to an SEC Form 3 filing on the Yens.
+
+Let’s take a look:
+
+```
+cd exercises
+head form_3_100.csv
+```
+
+You should see a column called `filepath` with full paths to `.txt` filings.
+
+### 🐍 View the batch-processing script
+
+```
+cat scripts/extract_form_3_batch.py
+```
+
+This version of the script:
+
+- Reads form_3_100.csv using pandas
+- Loops over all file paths
+- Sends each filing to OpenAI sequentially
+- Collects all structured results in a list
+- Saves them into one file: `results/form3_batch_results.json`
+
+This is still a single-core, sequential job good for testing and small data processing runs.
+
+### View the batch Slurm script
+
+```
+cat slurm/extract_form_3_batch.slurm
+```
+
+It should look like:
+
+```
+#!/bin/bash
+#SBATCH --job-name=form3-batch
+#SBATCH --output=logs/form3-batch-%j.out
+#SBATCH --time=02:00:00
+#SBATCH --mem=8G
+#SBATCH --cpus-per-task=1
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=your_email@stanford.edu
+
+cd ~/yens-onboarding-2025/exercises
+source venv/bin/activate
+
+python scripts/extract_form_3_batch.py
+```
+
+### ✅ Submit the batch job
+
+```
+sbatch slurm/extract_form_3_batch.slurm
+```
+
+Track it as usual:
+```
+squeue -u $USER
+```
+
+Check the logs once the job completes:
+
+```
+cat logs/form3-batch-<jobid>.out
+```
+
+And inspect the output JSON file:
+
+```
+cat results/form3_batch_results.json 
+```
 
 
 
