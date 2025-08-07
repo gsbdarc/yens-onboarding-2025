@@ -188,9 +188,9 @@ Before we can run this script, every user needs to have packages that the script
 
   3. Now that we looked at the python script, let's look at the `requirements.txt` file:
 
-  ```
-  cat requirements.txt
-  ```
+```
+cat requirements.txt
+```
 
 ❓ What is `requirements.txt` file?
 
@@ -262,9 +262,9 @@ Let’s load your OpenAI API key (or any secret) using `dotenv`.
 
 1. 💻 We created a hidden file to store secrets. Let's look at it:
 
-    ```
-    cat /scratch/shared/yens-onboarding-2025/.env
-    ```
+   ```
+   cat /scratch/shared/yens-onboarding-2025/.env
+   ```
 
 2. 🐍 Load the variable in Python:
 
