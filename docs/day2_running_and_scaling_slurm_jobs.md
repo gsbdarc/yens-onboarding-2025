@@ -278,13 +278,14 @@ source venv/bin/activate
 
 This activates your python virtual environment. It makes sure you are running the python script using the virtual environment we created earlier.
 
-  ```
-  python scripts/mystery_script.py
-  ```
-  This runs the actual Python script. It assumes you're inside the `exercises/` directory and that the `scripts/` subfolder is there.
+```
+python scripts/mystery_script.py
+```
 
-  > If you don't `cd` into the correct working directory, relative paths like `scripts/mystery_script.py` will fail.
-  {: .tip }
+This runs the actual Python script. It assumes you're inside the `exercises/` directory and that the `scripts/` subfolder is there.
+
+> If you don't `cd` into the correct working directory, relative paths like `scripts/mystery_script.py` will fail.
+{: .tip }
 
 
 🟩 / 🟥
