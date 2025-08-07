@@ -37,9 +37,9 @@ Login to the Yens.
 
 Take a note of which interactive yen (yen[1-5]) you are on. Then, open a new terminal (or second tab if using Jupyter), and connect to the **same** yen. 
 
-Now you should have two terminal both conneted to the same interactive yen. 
+Now you should have two terminals, both conneted to the same interactive yen. 
 
-In one of the terminals, run my mystery script:
+In one of the terminals, run a mystery script four times:
 
 ```
 cd yens-onboarding-2025/exercises/scripts
@@ -82,37 +82,39 @@ cd ~/yens-onboarding-2025/exercises/slurm
 
 Let’s make your first slurm job script. You can do this in JupyterHub usign Text Editor.
 
-  1. Make a new file in the `slurm` directory called `my_first_job.slurm`.
+1. Make a new file in the `slurm` directory called `my_first_job.slurm`.
 
-  2. Start the file with the bash shebang line:
-    ```
-    #!/bin/bash
-    ```
-    This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
+2. Start the file with the bash shebang line:
 
-  3. Add Slurm job configuration flags that request appropriate resources (replace `your_email` with your Stanford email):  
+  ```
+  #!/bin/bash
+  ```
 
-     ```
-     #SBATCH --job-name=my-first-job
-     #SBATCH --output=my-first-job.out
-     #SBATCH --time=10:00
-     #SBATCH --mem=4G
-     #SBATCH --cpus-per-task=1
-     #SBATCH --mail-type=ALL
-     #SBATCH --mail-user=your_email@stanford.edu
-     ```
+  This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
 
-    The `--output=my-first-job.out` flag tells Slurm to save all job outputs (printed to screen) in a text file named `my-first-job.out` in the same directory (`~/yens-onboarding-2025/exercises/slurm`).
+3. Add Slurm job configuration flags that request appropriate resources (replace `your_email` with your Stanford email):  
 
-  4. Finally, add a line to print a message: 
+   ```
+   #SBATCH --job-name=my-first-job
+   #SBATCH --output=my-first-job.out
+   #SBATCH --time=10:00
+   #SBATCH --mem=4G
+   #SBATCH --cpus-per-task=1
+   #SBATCH --mail-type=ALL
+   #SBATCH --mail-user=your_email@stanford.edu
+   ```
 
-    ```
-    echo "Hello there!" 
-    ```
+  The `--output=my-first-job.out` flag tells Slurm to save all job outputs (printed to screen) in a text file named `my-first-job.out` in the same directory (`~/yens-onboarding-2025/exercises/slurm`).
 
-    Save this file.
+4. Finally, add a line to print a message: 
 
-    🟩/🟥
+  ```
+  echo "Hello there!" 
+  ```
+
+Save this file.
+
+🟩/🟥
 
 ### 💻 Let’s submit it:
 
