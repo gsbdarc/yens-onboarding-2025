@@ -287,6 +287,7 @@ This runs the actual Python script. It assumes you're inside the `exercises/` di
 > If you don't `cd` into the correct working directory, relative paths like `scripts/mystery_script.py` will fail.
 {: .tip }
 
+Save and exit the file.
 
 🟩 / 🟥
 
@@ -305,7 +306,7 @@ cd ~/yens-onboarding-2025/exercises/slurm
 sbatch mystery_script.slurm
 ```
 
-### Step 4: Monitor the Job
+### Step 4: Monitor the job
 To check the status of your job:
 
 ```
@@ -315,7 +316,7 @@ squeue -u $USER
 You’ll see a table with columns like JOBID, NAME, STATE, TIME, and NODELIST.
 Your job may show up as `PD` (pending), `R` (running), or disappear when it’s finished.
 
-### Step 5: View the Output Log
+### Step 5: View the output log
 Once the job finishes, go to your `logs/` folder and inspect the output:
 
 ```
@@ -345,7 +346,8 @@ This file contains:
 > This is your first file to check when things don’t work — start with the `.out` file.
 {: .tip }
 
-✅ Recap
+✅ **Recap**:
+
 You’ve now:
 
 - Written a Slurm script to run a Python job using multiple CPU cores
@@ -356,7 +358,7 @@ You’ve now:
 
 - Submitted, monitored, and inspected a real cluster job
 
-Next up: handling jobs that fail, adding fault tolerance, and running many jobs at once using arrays.
+**Next up**: handling jobs that fail, adding fault tolerance, and running many jobs at once using arrays.
 
 
 ### 💻 Exercise: Debugging Cluster Jobs
