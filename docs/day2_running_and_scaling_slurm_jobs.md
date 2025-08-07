@@ -435,34 +435,21 @@ sbatch extract_form_3_one_file_broken.slurm
 Below are common fixes for the broken job scripts you've submitted. These mimic common real-world mistakes with paths and environments.
 
 
-#### 🔧 `fix_me.slurm`
+### 🔧 `fix_me.slurm`
 
 **Problem:**
 - Missing `cd` to the correct working directory
 - Missing environment activation
 - Assumes `scripts/extract_form_3_one_file.py` is in the current folder (it isn't)
 
-**Fix:**
-```bash
-cd ~/yens-onboarding-2025/exercises
-source venv/bin/activate
-python scripts/extract_form_3_one_file.py
-```
 
-#### 🔧 `fix_me_2.slurm`
+### 🔧 `fix_me_2.slurm`
 **Problem:**
 - Doesn’t `cd` into the right `~/yens-onboarding-2025/exercises` project folder, so `venv` folder is not found
 - Script calls `python extract_form_3_one_file.py`, assuming the 🐍 file is in the current directory
 
-**Fix:**
-```bash
-cd ~/yens-onboarding-2025/exercises
-source venv/bin/activate
-python scripts/extract_form_3_one_file.py
-```
 
-
-#### 🔧 `fix_me_3.slurm`
+### 🔧 `fix_me_3.slurm`
 
 **Problem:**
 - Uses a relative path for `cd yens-onboarding-2025/exercises`
