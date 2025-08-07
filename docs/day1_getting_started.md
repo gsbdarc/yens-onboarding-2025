@@ -192,7 +192,7 @@ Before we can run this script, every user needs to have packages that the script
   cat requirements.txt
   ```
 
-❓ What is requirements.txt file?
+❓ What is `requirements.txt` file?
 
 ❓ Why is it useful?
 
@@ -257,16 +257,16 @@ You can now run code that uses packages from your environment. If you can’t, l
 🟩/🟥
 
 
-## Securely Using Environment Variables
+## Securely using environment variables
 Let’s load your OpenAI API key (or any secret) using `dotenv`.
 
-  1. 💻 We created a hidden file to store secrets. Let's look at it:
+1. 💻 We created a hidden file to store secrets. Let's look at it:
 
     ```
     cat /scratch/shared/yens-onboarding-2025/.env
     ```
 
-   2. 🐍 Load the variable in Python:
+2. 🐍 Load the variable in Python:
 
    ```python
    import os
