@@ -362,21 +362,71 @@ You’ve now:
 
 
 ### 💻 Exercise: debugging cluster jobs
+In this exercise, you'll run a series of broken Slurm scripts that simulate **common mistakes** researchers make when working on a cluster.
+
+Each one will fail for a different reason — your job is to figure out why by inspecting the logs and **fixing the script**.
+
 ❓ What happens if your job crashes?
 
+- It may disappear from `squeue` without printing output
+- You may get an email from Slurm about the failure
+- Your `.out` file might contain Python errors or clues
+
+
 ❓ What information is in the Slurm log files?
+- Anything printed by your script (`stdout`)
+- Python tracebacks (`stderr`)
+- Resource usage (sometimes)
+- Error messages if Slurm kills the job (memory/time)
 
 ❓ How do you rerun failed jobs?
+- Open the `.slurm` script
+- Fix the error
+- Resubmit it using `sbatch`
 
-- Navigate to `~/yens-onboarding-2025/exercises/slurm`. 
 
-- Submit `fix_me.slurm`, `fix_me_2.slurm`, or `fix_me_3.slurm`.
 
-- Look at logs
+---
 
-- Fix it and resubmit
+### 🔧 Try These Broken Scripts
+1. Navigate to your `slurm/` directory: 
+  
+   ```
+   cd ~/yens-onboarding-2025/exercises/slurm   
+   ```
 
-- Bonus: debug `extract_form_3_one_file_broken.slurm`
+2. Submit each broken script:
+
+   ```
+   sbatch fix_me.slurm
+   sbatch fix_me_2.slurm
+   sbatch fix_me_3.slurm
+   ```
+
+3. Check the logs:
+
+   ```
+   cd logs
+   cat fix-me-<jobid>.out
+   ```
+
+4. Identify the issue and fix it. Use the Jupyter Text Editor.
+
+5. Resubmit once fixed:
+
+   ```
+   sbatch fix_me.slurm
+   ```
+
+6. 🟩 / 🟥 when complete
+
+### 💡 Bonus Challenge
+
+Try to debug this longer but broken script:
+
+```
+sbatch extract_form_3_one_file_broken.slurm
+```
 
 - 🟩/🟥
 
