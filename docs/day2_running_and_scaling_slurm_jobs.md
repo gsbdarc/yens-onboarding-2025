@@ -467,4 +467,136 @@ python scripts/extract_form_3_one_file.py
 - That your virtual environment is activated
 {: .tip }
 
+## 💥 What Happens When Jobs Fail?
+
+Sometimes your Slurm job script will **run**, but still **fail before finishing**. Two common reasons for this are:
+
+- Not requesting **enough memory**
+- Not requesting **enough time**
+
+Let’s simulate both types of failure with two example jobs.
+
+
+### Failure Case 1: Not Enough RAM
+
+Let’s write a script that tries to allocate too much memory.
+
+1. Create the file:
+
+   ```bash
+   touch slurm/fail_not_enough_memory.slurm
+   ```
+
+2. Add the following:
+
+   ```
+   #!/bin/bash
+   #SBATCH --job-name=fail-mem
+   #SBATCH --output=logs/fail-mem-%j.out
+   #SBATCH --time=00:05:00
+   #SBATCH --mem=100M        # Too little!
+   #SBATCH --cpus-per-task=1
+   #SBATCH --mail-type=END,FAIL
+   #SBATCH --mail-user=your_email@stanford.edu
+   
+   cd ~/yens-onboarding-2025/exercises
+   source venv/bin/activate
+   
+   python scripts/memory_hog.py
+   ```
+
+3. Save the file.
+
+   The script `memory_hog.py` should allocate a large list or array that uses more than 100 MB of RAM.
+   You can modify it to simulate memory use like this:
+
+   ```python
+   # memory_hog.py
+   big_list = [0] * int(1e8)  # ~800MB if using 8-byte ints
+   print("Allocated a big list")
+   ```
+
+
+4. Submit:
+ 
+   ```
+   sbatch slurm/fail_not_enough_memory.slurm
+   ```
+
+
+### Failure Case 2: Not Enough Time
+
+1. Create the file:
+
+   ```
+   touch slurm/fail_not_enough_time.slurm
+   ```
+
+2. Add this script:
+  
+   ```
+   #!/bin/bash
+   #SBATCH --job-name=fail-time
+   #SBATCH --output=logs/fail-time-%j.out
+   #SBATCH --time=00:00:05       # Just 5 seconds!
+   #SBATCH --mem=1G
+   #SBATCH --cpus-per-task=1
+   #SBATCH --mail-type=END,FAIL
+   #SBATCH --mail-user=your_email@stanford.edu
+   
+   cd ~/yens-onboarding-2025/exercises
+   source venv/bin/activate
+   
+   python scripts/sleep_longer.py
+   ```
+
+3. Add the Python script:
+
+   ```
+   # scripts/sleep_longer.py
+   import time
+   time.sleep(30)
+   print("Finished sleeping.")
+   ```
+
+4. Submit:
+
+   ```
+   sbatch slurm/fail_not_enough_time.slurm
+   ```
+
+
+### 🔍 Inspecting Failed Jobs
+
+After either job fails:
+
+1. Go to the `logs/` folder.
+
+2. Run:
+
+   ```
+   cat fail-mem-<jobid>.out
+   ```
+  
+   or
+
+   ```
+   cat fail-time-<jobid>.out
+   ```
+
+   You may see errors like:
+
+   - `Killed` (from the memory-limited job)
+   - `DUE TO TIME LIMIT` (in the time-limited job)
+
+> Read Slurm emails after the job fails for memory utilization and hints on why it failed.
+{: .tip }
+
+
+### 🛠️ How to Fix It
+- If a job ran out of memory, increase `#SBATCH --mem=...` to a realistic number (e.g., 2G, 4G, etc.).
+
+- If it ran out of time, increase `#SBATCH --time=...` based on how long your script actually needs (remember to use `time` interactively to measure).
+
+
 
