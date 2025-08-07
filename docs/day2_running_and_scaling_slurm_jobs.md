@@ -104,13 +104,13 @@ Let’s make your first slurm job script. You can do this in JupyterHub usign Te
    #SBATCH --mail-user=your_email@stanford.edu
    ```
 
-  The `--output=my-first-job.out` flag tells Slurm to save all job outputs (printed to screen) in a text file named `my-first-job.out` in the same directory (`~/yens-onboarding-2025/exercises/slurm`).
+   The `--output=my-first-job.out` flag tells Slurm to save all job outputs (printed to screen) in a text file named `my-first-job.out` in the same directory (`~/yens-onboarding-2025/exercises/slurm`).
 
 4. Finally, add a line to print a message: 
 
-  ```
-  echo "Hello there!" 
-  ```
+   ```
+   echo "Hello there!" 
+   ```
 
 Save this file.
 
