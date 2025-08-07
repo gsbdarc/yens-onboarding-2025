@@ -226,40 +226,38 @@ Let’s write a new Slurm script that runs the Python script `scripts/mystery_sc
 
 As we know, this script uses multiple CPU cores, so we’ll request **10 cores**.
 
----
+1. Navigate to the `slurm/` directory:
+  
+   ```bash
+   cd ~/yens-onboarding-2025/exercises/slurm
+   ```
 
-  1. Navigate to the `slurm/` directory:
-  
-  ```bash
-  cd ~/yens-onboarding-2025/exercises/slurm
-  ```
+2. Create a new text file in JupyterHub Text Editor (make sure it's in the `slurm` directory) and paste the following (update the email line!):
 
-  2. Create a new text file in JupyterHub Text Editor (make sure it's in the `slurm` directory) and paste the following (update the email line!):
+   ```
+   #!/bin/bash
+   #SBATCH --job-name=mystery
+   #SBATCH --output=logs/mystery-%j.out
+   #SBATCH --time=00:05:00
+   #SBATCH --mem=8G
+   #SBATCH --cpus-per-task=10
+   #SBATCH --mail-type=ALL
+   #SBATCH --mail-user=your_email@stanford.edu
+   
+   # Move into the correct working directory
+   cd ~/yens-onboarding-2025/exercises
+   
+   # Activate your Python environment
+   source venv/bin/activate
+   
+   # Run the Python script
+   python scripts/mystery_script.py
+   ```
+  
+3. Name the file `mystery_script.slurm`.
 
-  ```
-  #!/bin/bash
-  #SBATCH --job-name=mystery
-  #SBATCH --output=logs/mystery-%j.out
-  #SBATCH --time=00:05:00
-  #SBATCH --mem=8G
-  #SBATCH --cpus-per-task=10
-  #SBATCH --mail-type=ALL
-  #SBATCH --mail-user=your_email@stanford.edu
-  
-  # Move into the correct working directory
-  cd ~/yens-onboarding-2025/exercises
-  
-  # Activate your Python environment
-  source venv/bin/activate
-  
-  # Run the Python script
-  python scripts/mystery_script.py
-  ```
-  
-  3. Name the file `mystery_script.slurm`.
-
-  #### About the `logs/` Folder
-  The line `#SBATCH --output=logs/mystery-%j.out` tells Slurm to write all job output (stdout and stderr) to a file inside the `logs/` folder. The `%j` gets replaced by the Slurm job ID, so each job has its own unique log file.
+#### About the `logs/` folder
+The line `#SBATCH --output=logs/mystery-%j.out` tells Slurm to write all job output (stdout and stderr) to a file inside the `logs/` folder. The `%j` gets replaced by the Slurm job ID, so each job has its own unique log file.
 
   Before submitting the job, we must create the `logs` directory:
 
