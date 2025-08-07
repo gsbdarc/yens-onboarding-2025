@@ -737,4 +737,59 @@ cat results/form3_batch_results.json
 ```
 
 
+## 🛠 Fault Tolerance: Why Sequential Jobs Can Be Fragile
+
+Let’s say you submitted your batch job to process 100 Form 3 filings. Everything is going well — until...
+
+❌ **It fails at filing #80**.
+
+Maybe:
+- The file is malformed
+- OpenAI times out or throws an error
+- You ran out of memory or time
+
+
+### 😬 What happens now?
+
+Your script **stops completely**, and:
+- The first 79 results are stored *in memory*, but not saved
+- Filing #80 crashed the whole job
+- You lose all progress unless you saved partial results along the way
+
+### 🚫 Why this is a problem
+
+> In long sequential jobs, one bad file — or one bad network call — can ruin hours of compute.
+{: .important }
+
+You’d need to:
+
+- Manually figure out where it failed
+- Fix / remove that file from the list
+- Restart the job from scratch
+
+That’s not scalable.
+
+
+✅ What can we do instead?
+We need to build fault tolerance into our workflow.
+
+There are two standard strategies:
+
+### Strategy 1: Save as you go
+
+Update your script so that it:
+
+- Writes results incrementally (e.g., one JSON line per file)
+- Skips over broken files and logs them separately
+
+This way, if a job crashes, you can:
+
+- Resume only the remaining files
+- Avoid repeating work
+
+We'll implement this next.
+
+
+
+
 
