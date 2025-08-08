@@ -943,6 +943,27 @@ Let's look at the 🐍 script:
 cat scripts/extract_form_3_one_from_csv.py
 ```
 
+### Run it
+```
+cd ~/yens-onboarding-2025/exercises
+sbatch slurm/extract_form_3_array.slurm
+```
+
+Watch the queue:
+
+```
+squeue -u $USER
+```
+
+Notice that 100 independent jobs will be pending/running from one slurm script.
+
+After all of the tasks have finished, check outputs:
+
+```
+ls results/array | head
+cat results/array/form3_row_42.json
+```
+
 
 {: .important }
 > Using arrays on the Yens has a lot of advantages:
@@ -952,3 +973,31 @@ cat scripts/extract_form_3_one_from_csv.py
 > However, using arrays is **not** a silver bullet:
 > * In our example, we assumed we have one array job per filing URL. In practice, it may be more efficient to process several URLs together for one individual array job.
 > * As we've written it, our code spits out one output file per array job. In practice, you still need to combine these into one single data output, ideally using an additional script you'll have to write.
+
+
+## Sharing Your Work & Results
+OK! We’ve now processed a bunch of SEC filings.
+
+{: .note }
+> What's left for us to do?
+
+### Copying Results
+You want to copy the results from the Yens onto your local machine to share the results with your advisor. How do you do it?
+
+{: .tip }
+> Remember: Where do we run commands for copying from?
+
+### Communicating Your Work
+
+Finally, your advisor (who hasn't been keeping up with your progress, alas) wants to understand the code you've written, to make sure that everything makes sense.
+
+We've already created a `README.md` document for you to edit in the repository you cloned yesterday.
+Your job is to edit that document, and fill in the following details so it's easy for your advisor (or your future self) to understand your work:
+* What does your SEC filing pipeline do?
+* How can someone run it?
+* Where are the results are saved?
+* If we get new SEC filings data, how should someone update and re-run the pipeline?
+
+When you're done, please put a green sticky note 🟩 on the back of your laptop so we know you're done.
+
+
