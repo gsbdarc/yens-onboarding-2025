@@ -910,6 +910,8 @@ When finished, check `results/form3_batch.json` to confirm all 100 results are t
 
 🟩/🟥
 
+
+
 ## ⚡️ Parallel Processing with Slurm Arrays (100 filings at once)
 Sequential data processing is slow. Let’s parallelize and run **one filing per Slurm task** using an **array job**.
 
@@ -931,7 +933,7 @@ SLURM_ARRAY_TASK_ID=99 # for the last
 ```
 
 
-We’ll pass that index as a command-line argument to Python to select the matching row in the CSV. We can use the index directory in Python to pick which file to process.
+We’ll pass that index as a command-line argument to Python to select the matching row in the CSV. We can use the index directly in Python to pick which file to process.
 
 Our 🐍 script will process **one** row by index.
 
