@@ -892,6 +892,54 @@ If you check the **log file** in `logs/`, you’ll see the traceback points to a
 3. After they correct the input file, resubmit the job.
 
 
+Because we’re using checkpointing, we don’t need to start from scratch —
+the script will skip already processed files and pick up right after file #8.
+
+```
+sbatch extract_form_3_batch_checkpoint.slurm
+```
+
+Monitor the logs and verify the run completes:
+
+```
+squeue -u $USER
+tail -f logs/form3-batch-<new_jobid>.out
+```
+
+When finished, check `results/form3_batch.json` to confirm all 100 results are there.
+
+🟩/🟥
+
+## ⚡️ Parallel Processing with Slurm Arrays (100 filings at once)
+Sequential data processing is slow. Let’s parallelize and run **one filing per Slurm task** using an **array job**.
+
+**Idea:** Give each task an index (`0..99`) and have the Python script process the file at that row in `form_3_100.csv`.
+
+---
+
+### Concept: Slurm array 
+
+
+When you submit with `#SBATCH --array=0-99`, Slurm launches 100 tasks.  
+Each task gets an environment variable:
+
+```
+SLURM_ARRAY_TASK_ID=0 # for the first task
+SLURM_ARRAY_TASK_ID=1 # for the second
+...
+SLURM_ARRAY_TASK_ID=99 # for the last
+```
+
+
+We’ll pass that index as a command-line argument to Python to select the matching row in the CSV. We can use the index directory in Python to pick which file to process.
+
+Our 🐍 script will process **one** row by index.
+
+Let's look at the 🐍 script:
+
+```
+cat scripts/extract_form_3_one_from_csv.py
+```
 
 
 
