@@ -523,6 +523,7 @@ Let’s write a script that tries to allocate too much memory.
    sbatch slurm/fail_not_enough_memory.slurm
    ```
 
+🟩 / 🟥
 
 ### Failure Case 2: Not Enough Time
 
@@ -565,6 +566,7 @@ Let’s write a script that tries to allocate too much memory.
    sbatch slurm/fail_not_enough_time.slurm
    ```
 
+🟩 / 🟥
 
 ### 🔍 Inspecting Failed Jobs
 
@@ -598,10 +600,13 @@ After either job fails:
 
 - If it ran out of time, increase `#SBATCH --time=...` based on how long your script actually needs (remember to use `time` interactively to measure).
 
+- Fix it and resubmit.
+
+🟩 / 🟥
 ---
 
 
-## Submitting Your First Structured Extraction Job
+## Submitting Form 3 Extraction Job
 Now that you've seen how to submit a Slurm job, let’s process a real SEC Form 3 filing using OpenAI and a structured output model with Pydantic.
 
 ### 🐍 View the script
@@ -657,7 +662,7 @@ After submission:
 - Monitor the job with `squeue -u $USER`
 - Check the output in `logs/` once it finishes
 
-
+🟩 / 🟥
 
 ## Scaling Up to Process Many Files
 Now let’s move from a single example to 100 filings. 
@@ -734,8 +739,12 @@ Check the logs once the job completes:
 cat logs/form3-batch-<jobid>.out
 ```
 
+🟩 / 🟥
+
 ❓ What do you see in the log file? 
+
 ❓ What do you see in the `results` folder? 
+
 ❓ How can we improve upon this? 
 
 ## 🛠 Fault Tolerance: Why We Need to Track Progress
@@ -761,7 +770,7 @@ You’ll see that the script:
 {: .note }
 
 
-### ⚠️ What We're Doing Now
+### ⚠️  What We're Doing Now
 
 In our current approach, if a long batch job fails, we:
 
@@ -794,6 +803,93 @@ This way:
 ---
 
 Up next: we’ll run a **checkpointed batch script** that does all of this automatically.
+
+
+## ✅ Fault‑Tolerant Batch (Save As You Go & Resume) Script
+We’re upgrading the batch job so it **keeps progress** even if it crashes mid‑run, then **skips already‑processed files** on the next run.
+
+You’ll use this Python script:
+
+```bash
+cat scripts/extract_form_3_batch_checkpoint.py
+```
+
+It:
+
+- Reads the file list from `/scratch/shared/yens-onboarding-2025/data/form_3_100.csv`
+
+- Loads existing results from results/form3_batch.json (if present)
+
+- Processes only the remaining files
+
+- Appends in memory and writes to JSON after each file
+
+### View the Slurm job
+
+```
+cat slurm/extract_form_3_batch_checkpoint.slurm
+```
+
+You should see:
+
+```
+#!/bin/bash
+#SBATCH --job-name=form3-checkpoint
+#SBATCH --output=logs/form3-checkpoint-%j.out
+#SBATCH --time=04:00:00
+#SBATCH --mem=8G
+#SBATCH --cpus-per-task=1
+#SBATCH --mail-type=END,FAIL
+#SBATCH --mail-user=your_email@stanford.edu
+
+# Project working directory
+cd ~/yens-onboarding-2025/exercises
+
+# Activate your environment
+source venv/bin/activate
+
+# Run the checkpointed batch processor
+python scripts/extract_form_3_batch_checkpoint.py
+```
+
+### Submit, Monitor, Resume
+From `slurm` directory:
+
+```
+cd ~/yens-onboarding-2025/exercises/slurm
+sbatch extract_form_3_batch_checkpoint.slurm
+```
+
+Monitor:
+
+```
+squeue -u $USER
+```
+
+Inspect logs when done:
+
+```
+cat logs/form3-checkpoint-<jobid>.out
+```
+
+🟩 / 🟥
+
+### 💻 Exercise: Fixing a Broken Path and Resubmitting
+
+Our checkpointed batch job just failed!  
+
+If you check the **log file** in `logs/`, you’ll see the traceback points to a missing `.txt` on file #9’s path.
+
+**What happened?**  
+- One of the file paths in our `form_3_100.csv` file is wrong.
+- The Python script can’t open the file and stops at that point.
+- Luckily, with checkpointing, everything before the failure is already saved.
+
+1. In the most recent `.out` file, look for the last processed file — the one right before the crash.
+
+2. The instructor will correct the broken path in the CSV file.
+
+3. After they correct the input file, resubmit the job.
 
 
 
