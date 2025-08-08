@@ -946,11 +946,9 @@ cat scripts/extract_form_3_one_from_csv.py
 
 
 > Using arrays on the Yens has a lot of advantages:
-
-  - We can maximally exploit the large number of cores on the Yens and finish our work faster;
-  - Since each array job is entirely independent from the others, we still get the same result.
-  However, using arrays is not a silver bullet:
-
-  - In our example, we assumed we have one array job per filing URL. In practice, it may be more efficient to process several URLs together for one individual array job.
-  - As we’ve written it, our code spits out one output file per array job. In practice, you still need to combine these into one single data output, ideally using an additional script you’ll have to write.
+- We can maximally exploit the large number of cores on the Yens and finish our work faster;
+- Since each array job is entirely independent from the others, we still get the same result.
+However, using arrays is not a silver bullet:
+- In our example, we assumed we have one array job per filing URL. In practice, it may be more efficient to process several URLs together for one individual array job.
+- As we’ve written it, our code spits out one output file per array job. In practice, you still need to combine these into one single data output, ideally using an additional script you’ll have to write.
 {: .important }
