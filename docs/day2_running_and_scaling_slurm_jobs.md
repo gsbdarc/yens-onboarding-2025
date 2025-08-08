@@ -681,7 +681,7 @@ cat scripts/extract_form_3_batch.py
 
 This version of the script:
 
-- Reads form_3_100.csv using pandas
+- Reads `form_3_100.csv` using pandas
 - Loops over all file paths
 - Sends each filing to OpenAI sequentially
 - Collects all structured results in a list
@@ -715,7 +715,11 @@ python scripts/extract_form_3_batch.py
 
 ### ✅ Submit the batch job
 
+Edit the slurm file to include your email.
+
+Then submit from `slurm` directory:
 ```
+cd exercises/slurm
 sbatch slurm/extract_form_3_batch.slurm
 ```
 
@@ -730,64 +734,67 @@ Check the logs once the job completes:
 cat logs/form3-batch-<jobid>.out
 ```
 
-And inspect the output JSON file:
+❓ What do you see in the log file? 
+❓ What do you see in the `results` folder? 
+❓ How can we improve upon this? 
 
-```
-cat results/form3_batch_results.json 
-```
+## 🛠 Fault Tolerance: Why We Need to Track Progress
 
-
-## 🛠 Fault Tolerance: Why Sequential Jobs Can Be Fragile
-
-Let’s say you submitted your batch job to process 100 Form 3 filings. Everything is going well — until...
-
-❌ **It fails at filing #80**.
-
-Maybe:
-- The file is malformed
-- OpenAI times out or throws an error
-- You ran out of memory or time
+Let’s talk about what happens when things go wrong in real-world file processing.
 
 
-### 😬 What happens now?
+### 🔍 Step 1: Run the batch job
 
-Your script **stops completely**, and:
-- The first 79 results are stored *in memory*, but not saved
-- Filing #80 crashed the whole job
-- You lose all progress unless you saved partial results along the way
+We ran the `extract_form_3_batch.py` script on our `form_3_100.csv` file.
 
-### 🚫 Why this is a problem
-
-> In long sequential jobs, one bad file — or one bad network call — can ruin hours of compute.
+> This CSV intentionally contains a broken file path around the 8th entry so that the job will fail.  
 {: .important }
 
-You’d need to:
+**What happened?**
+You’ll see that the script:
 
-- Manually figure out where it failed
-- Fix / remove that file from the list
-- Restart the job from scratch
+- Processed the first ~8 files successfully
+- Then crashed when it hit a bad path
+- Lost all progress — the earlier results were stored in memory only and never written to disk
 
-That’s not scalable.
+> In a long sequential job, one bad file can ruin **hours of compute** if you only save results at the end.
+{: .note }
 
 
-✅ What can we do instead?
-We need to build fault tolerance into our workflow.
+### ⚠️ What We're Doing Now
 
-There are two standard strategies:
+In our current approach, if a long batch job fails, we:
 
-### Strategy 1: Save as you go
+- Have to start **from scratch**
+- Waste compute time and API calls (a.k.a. 💸 money)
+- Face many possible **failure modes**:
+  - Malformatted paths
+  - Corrupted input files
+  - API timeouts or rate limits
+  - Running out of Slurm time or memory
+- Manually figure out where the failure happened
+- Fix or remove the problematic file from the input list
+- Re-run the **entire** job
 
-Update your script so that it:
+That’s not scalable — especially when jobs take hours or days.
 
-- Writes results incrementally (e.g., one JSON line per file)
-- Skips over broken files and logs them separately
 
-This way, if a job crashes, you can:
+### ✅ What Can We Do Instead?
 
-- Resume only the remaining files
-- Avoid repeating work
+We can make our script **fault-tolerant** by:
+1. **Saving results as we go** — so progress isn’t lost when something fails
+2. **Logging failures** to a separate file for later review
+3. **Skipping already-processed files** when resuming a job
 
-We'll implement this next.
+This way:
+- If the job fails after file #80, we still keep results for files #1–79
+- A re-run processes *only* the remaining files
+- We minimize wasted time, compute, and API costs
+
+---
+
+Up next: we’ll run a **checkpointed batch script** that does all of this automatically.
+
 
 
 
