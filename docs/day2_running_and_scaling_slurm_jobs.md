@@ -895,43 +895,5 @@ Over these two sessions, you’ve learned to:
 ✅ You now have the full workflow: from logging in and setting up an environment, through running and scaling jobs, to sharing results.
 
 ---
-## Resources for Further Learning
-
-Many of the skills you learned here are **not unique to the Yens**. If you want to deepen your foundations, these resources are excellent starting points:
-
-- [The Carpentries](https://carpentries.org/): beginner-friendly lessons on the command line, Git, Python, R, and more  
-- [HPC Carpentry](https://hpc-carpentry.github.io/): lessons on using high-performance computing systems  
-- [Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)  
-- [Software Carpentry: Version Control with Git](https://swcarpentry.github.io/git-novice/)  
-
----
-
-## Where to Get Help
-
-- **RCpedia** — [rcpedia.stanford.edu](https://rcpedia.stanford.edu/) (searchable documentation for research computing at GSB)  
-- **Slack** — Join the `#gsb-yen-users` channel to ask/answer questions and see announcements  
-- **Email** — [gsb_darcresearch@stanford.edu](mailto:gsb_darcresearch@stanford.edu)  
-
----
-
-## Tips Before Asking for Help
-
-When something doesn’t work:
-
-1. **Try debugging yourself first**  
-   - Read the error messages carefully  
-   - Check the Slurm log files (`.out`)  
-   - Use AI assistants or a buddy to reason through the problem  
-
-2. **When reaching out for help, share three things:**  
-   - What you tried (the command/script you ran)  
-   - What you expected to happen  
-   - What actually happened (error messages, output)  
-
-This helps us help you much faster — and it makes you a stronger cluster user.  
-
----
-
-🎉 **Congratulations — you’ve completed Yens Onboarding!**  
-You now know how to connect, run, debug, and scale jobs on the cluster.  
-Your next step is to bring these skills into your own research projects — and remember, you’re not alone: RCpedia, Slack, and the DARC team are here to help you along the way.
+🎉 **Congratulations on completing Yens Onboarding!**  
+You now have the skills to connect, run, debug, and scale jobs on the cluster. Bring these tools into your research — and remember, you’ve got a community and resources to support you.
