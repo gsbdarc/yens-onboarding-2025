@@ -79,6 +79,6 @@ By the end of the course, you will be able to:
 
 ## The DARC Team
 
-| ![DARC Team September 2024](/assets/images/darc.jpg) | ![DARC Team at Art Museum](/assets/images/yo-darc-team.jpg) |
+| ![DARC Team September 2024](/assets/images/darc.png) | ![DARC Team at Art Museum](/assets/images/yo-darc-team.jpg) |
 |:-------------------------------------------------------------:|:--------------------------------------------------------------:|
-| DARC Team September 2024                                      | DARC Team at Art Museum                                        |
+| DARC Team | DARC Team at Art Museum                                        |
