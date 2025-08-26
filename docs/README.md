@@ -71,7 +71,7 @@ By the end of the course, you will be able to:
 - Need help beyond class? Check [**RCpedia**](https://rcpedia.stanford.edu) and reach us on Slack.
 
 ### Contact us
-- Join the **#gsb-yen-users** Slack channel to ask/answer questions and see workshop announcements.  
+- Join the **#gsb-yen-users** [Slack channel](https://app.slack.com/client/T0DGNR8SY/C01JXJ6U4E5) to ask/answer questions and see workshop announcements.  
   If the link fails, open Slack and search for **#gsb-yen-users**.
 - Email: [gsb_darcresearch@stanford.edu](mailto:gsb_darcresearch@stanford.edu)
 
@@ -79,6 +79,6 @@ By the end of the course, you will be able to:
 
 ## The DARC Team
 
-| ![DARC Team September 2024](/assets/images/darc.png) | ![DARC Team at Art Museum](/assets/images/yo-darc-team.jpg) |
+| ![DARC Team September 2024](/assets/images/darc.png) | ![DARC Team at Cantor Art Museum](/assets/images/yo-darc-team.jpg) |
 |:-------------------------------------------------------------:|:--------------------------------------------------------------:|
 | DARC Team | DARC Team at Art Museum                                        |
