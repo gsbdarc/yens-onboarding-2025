@@ -10,7 +10,7 @@ updateDate: 2025-07-28
 ---
 # {{ page.title }}
 
-Welcome! This two-session onboarding will get you productive on Stanford GSB’s research computing cluster—the **Yens**—and ready to run real research workflows at scale.
+Welcome! This two-session onboarding will get you productive on Stanford GSB’s research computing cluster —- the **Yens**, and ready to run real research workflows at scale.
 
 ---
 
@@ -68,7 +68,7 @@ By the end of the course, you will be able to:
 ---
 
 ## Support & resources
-- Need help beyond class? Check **RCPedia** and reach us on Slack.
+- Need help beyond class? Check [**RCpedia**](https://rcpedia.stanford.edu) and reach us on Slack.
 
 ### Contact us
 - Join the **#gsb-yen-users** Slack channel to ask/answer questions and see workshop announcements.  
@@ -78,7 +78,7 @@ By the end of the course, you will be able to:
 ---
 
 ## The DARC Team
-<div style="display: flex; justify-content: center; gap: 10px;">
-  <img src="/assets/images/darc.jpg" alt="DARC Team September 2024" style="width:48%; border-radius:8px;" />
-  <img src="/assets/images/yo-darc-team.jpg" alt="DARC Team at Art Museum" style="width:48%; border-radius:8px;" />
-</div>
+
+| ![DARC Team September 2024](/assets/images/darc.jpg) | ![DARC Team at Art Museum](/assets/images/yo-darc-team.jpg) |
+|:-------------------------------------------------------------:|:--------------------------------------------------------------:|
+| DARC Team September 2024                                      | DARC Team at Art Museum                                        |
