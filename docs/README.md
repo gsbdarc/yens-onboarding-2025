@@ -10,7 +10,7 @@ updateDate: 2025-07-28
 ---
 # {{ page.title }}
 
-Welcome! This two-session onboarding will get you productive on Stanford GSB’s research computing cluster —- the **Yens**, and ready to run real research workflows at scale.
+Welcome! This two-session onboarding will get you productive on Stanford GSB’s research computing cluster — the **Yens**, and ready to run real research workflows at scale.
 
 ---
 
