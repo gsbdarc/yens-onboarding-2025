@@ -8,7 +8,7 @@ nav_order: 1
 
 ## Overview
 
-This first session introduces you to Stanford GSB’s research computing cluster — the Yens. You’ll learn how to log in, navigate the file system, set up reproducible Python environments, and run code interactively on the cluster or through JupyterHub.
+This first session introduces you to Stanford GSB’s research computing cluster — the Yens. You’ll learn how to log in, navigate the file system, set up reproducible Python environments, and run code interactively on the cluster or through JupyterHub. We’ll also take our first step into Slurm by submitting a simple batch job.
 
 > 🔗 **Need help?** Visit [rcpedia.stanford.edu](https://rcpedia.stanford.edu/) or reach out via the [GSB DARC Slack](https://app.slack.com/client/E7SAV7LAD/C01JXJ6U4E5).
 
@@ -20,25 +20,16 @@ By the end of today you will be able to:
 
 - Connect to the Yens via SSH and JupyterHub.
 - Navigate the file system using basic shell commands.
+- Copy files and folders between your laptop and the cluster.
 - Create and activate Python virtual environments.
 - Install and link Jupyter kernels to your custom environment.
 - Run code via Python scripts and Jupyter notebooks on the Yens.
 - Use environment variables securely (e.g., for API keys).
 - Explore paths and reproducibility on shared systems.
+- Estimate appropriate resources (CPU, memory, time) of scripts interactively.
+- Submit your first simple job with Slurm.
 
 ---
-
-A legend we will use:
-
-💻: means “use terminal on the Yens”
-
-✏️ : means “we will white board this”
-
-🐍: means "Python script"
-
-❓: question for class. Feel free to shout out the answer
-
-🟩/🟥: means “put up the colored sticky once you finish the exercise / ask for help”
 
 
 ## Connecting to the Yens
@@ -56,7 +47,7 @@ ssh <SUNetID>@yen.stanford.edu
 ```
 You’ll be prompted for Duo authentication.
 
-🟩/🟥
+🟩 / 🟥
 
 ### 💻 Command line basics
 
@@ -277,11 +268,155 @@ Let’s load your OpenAI API key (or any secret) using `dotenv`.
 
 This allows you to use secrets without hardcoding them into scripts. 
 
+## Cluster Resources
+TODO
+
+✏️ Interactive Yens
+
+✏️ Yen-Slurm Cluster
+
+
+## 💻 Run a mystery python script
+
+Login to the Yens.
+
+Take a note of which interactive yen (yen[1-5]) you are on. Then, open a new terminal (or second tab if using Jupyter), and connect to the **same** yen.
+
+Now you should have two terminals, both conneted to the same interactive yen.
+
+In one of the terminals, run a mystery script four times:
+
+```
+cd yens-onboarding-2025/exercises/scripts
+python3 mystery_script.py
+```
+
+1. While the script is running, in a second terminal connected to the same yen, watch the script run while running `htop`.
+
+2. While the script is running, in a second terminal connected to the same yen, watch the script run while running `htop -u $USER`.
+
+3. While the script is running, in a second terminal connected to the same yen, watch the script run while running `watch userload`.
+
+4. To time the script, run in one of the terminals:
+
+```
+time python3 mystery_script.py
+```
+Key things to watch:
+
+- Peak RAM usage
+- Number of cores used
+- Runtime
+
+
+Compare with your neighbor the time, cores and RAM usage for this script.
+
+❓ What do you see?
+
+🟩/🟥
+
+Now we know how many resources the script needs, we can submit it as a batch job to the scheduler requesting the resources from it.
+
+## Submitting your first Yen-Slurm job
+
+Navigate to `~/yens-onboarding-2025/exercises/slurm` directory:
+
+```
+cd ~/yens-onboarding-2025/exercises/slurm
+```
+
+Let’s make your first slurm job script. You can do this in JupyterHub usign Text Editor.
+
+1. Make a new file in the `slurm` directory called `my_first_job.slurm`.
+
+2. Start the file with the bash shebang line:
+
+   ```
+   #!/bin/bash
+   ```
+
+   This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
+
+3. Add Slurm job configuration flags that request appropriate resources (replace `your_email` with your Stanford email):
+
+   ```
+   #SBATCH --job-name=my-first-job
+   #SBATCH --output=my-first-job.out
+   #SBATCH --time=10:00
+   #SBATCH --mem=4G
+   #SBATCH --cpus-per-task=1
+   #SBATCH --mail-type=ALL
+   #SBATCH --mail-user=your_email@stanford.edu
+   ```
+
+   The `--output=my-first-job.out` flag tells Slurm to save all job outputs (printed to screen) in a text file named `my-first-job.out` in the same directory (`~/yens-onboarding-2025/exercises/slurm`).
+
+4. Finally, add a line to print a message:
+
+   ```
+   echo "Hello there!"
+   ```
+
+Save this file.
+
+🟩/🟥
+
+### 💻 Let’s submit it:
+
+Run:
+```
+sbatch my_first_job.slurm
+```
+You’ll see output like:
+
+```
+Submitted batch job 123456
+```
+
+The `123456` is a job ID which is unique for every job on the cluster.
+
+
+## Monitoring slurm jobs
+
+View the job queue:
+
+```
+squeue
+```
+
+Or filter to just your jobs:
+```
+squeue -u $USER
+```
+
+Cancel a job if needed:
+```
+scancel <job-id>
+```
+
+## Checking results
+After the job completes:
+
+Look at the `.out` file created:
+```
+cat my-first-job.out
+```
+
+You should see:
+
+```
+Hello there!
+```
+
+If you included your email in `--mail-user`, you’ll also receive an email from Slurm when the job starts and ends.
+
 
 ## Summary
 You're now ready to:
 
 - Connect and move around the Yens
+
+- Copy data to/from the cluster
 
 - Create and use virtual environments
 
@@ -289,4 +424,6 @@ You're now ready to:
 
 - Manage packages and secrets in a reproducible way
 
+- Measure CPU/RAM needs interactively
 
+- Submit your first Slurm job

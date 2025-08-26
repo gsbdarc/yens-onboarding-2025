@@ -49,14 +49,22 @@ By the end of the course, you will be able to:
 - You’ve done *some* programming (Python preferred). If not, tell us and we’ll get you unstuck.
 - You can bring a laptop with Duo for Stanford login and a modern browser.
 
-### What to do during class
-- Work through each hands-on step in order; put up 🟩 when done, 🟥 for help (we’ll circulate).
-- Ask questions out loud—especially when something fails. We’ll use failures to practice debugging.
-
 ### Setup you’ll complete in class
 - SSH/JupyterHub access and file transfer.
 - Local repo clone and a working **venv** linked to Jupyter.
 - A first Slurm submission on Day 1; full Slurm workflow on Day 2.
+
+### Legend we will use
+
+- 💻: means “use terminal on the Yens”
+- ✏️ : means “we will white board this”
+- 🐍: means "Python script"
+- ❓: question for class. Feel free to shout out the answer
+- 🟩 / 🟥: means “put up the colored sticky once you finish the exercise / ask for help”
+
+### What to do during class
+- Work through each hands-on step in order; put up 🟩 when done, 🟥 for help (we’ll circulate).
+- Ask questions out loud—especially when something fails. We’ll use failures to practice debugging.
 
 ---
 

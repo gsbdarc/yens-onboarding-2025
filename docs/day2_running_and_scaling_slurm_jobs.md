@@ -8,7 +8,9 @@ nav_order: 2
 
 ## Overview
 
-Today we move from interactive work on the Yens and Jupyter to **running scheduled jobs on the Yens cluster** using Slurm — cluster's job scheduler. You’ll learn how to submit jobs, monitor them, debug them, and scale them up for real research.
+We start today with a quick **recap of Day 1**: connecting to the Yens, setting up virtual environments, running scripts interactively, and submitting your very first Slurm job.  
+
+Building on that foundation, we now move into **using Slurm for real research workflows**. You’ll learn how to run more complex scripts, monitor jobs effectively, debug common errors, make your code fault-tolerant with checkpointing, and scale up to many jobs using arrays.
 
 ---
 
@@ -16,153 +18,25 @@ Today we move from interactive work on the Yens and Jupyter to **running schedul
 
 By the end of today you will be able to:
 
-- Write and submit Slurm batch job scripts
-- Estimate appropriate resources (CPU, memory, time)
+- Submit Slurm batch job scripts
 - Monitor and cancel running jobs
 - Handle failed or stuck jobs
+- Write fault-tolerant code
 - Organize code for cluster-based research workflows
 - Scale up tasks using job arrays
+- Copy results back off the cluster
 
+---
+## Recap from Day 1
 
-## Cluster Resources
-TODO
+- Connected to the Yens via SSH and JupyterHub  
+- Navigated the filesystem, copied files with `scp`  
+- Created and activated a Python virtual environment  
+- Installed packages and linked a Jupyter kernel  
+- Ran code interactively and measured CPU/RAM usage with `htop` and `time`  
+- Submitted a simple Slurm job (`my_first_job.slurm`)  
 
-✏️ Interactive Yens
-
-✏️ Yen-Slurm Cluster
-
-## 💻 Run a mystery python script
-
-Login to the Yens.
-
-Take a note of which interactive yen (yen[1-5]) you are on. Then, open a new terminal (or second tab if using Jupyter), and connect to the **same** yen. 
-
-Now you should have two terminals, both conneted to the same interactive yen. 
-
-In one of the terminals, run a mystery script four times:
-
-```
-cd yens-onboarding-2025/exercises/scripts
-python3 mystery_script.py
-```
-
-1. While the script is running, in a second terminal connected to the same yen, watch the script run while running `htop`.
-
-2. While the script is running, in a second terminal connected to the same yen, watch the script run while running `htop -u $USER`.
-
-3. While the script is running, in a second terminal connected to the same yen, watch the script run while running `watch userload`.
-
-4. To time the script, run in one of the terminals:
-
-```
-time python3 mystery_script.py
-```
-Key things to watch:
-
-- Peak RAM usage
-- Number of cores used
-- Runtime
-
-
-Compare with your neighbor the time, cores and RAM usage for this script.
-
-❓ What do you see?
-
-🟩/🟥
-
-Now we know how many resources the script needs, we can submit it as a batch job to the scheduler requesting the resources from it.
-
-## Submitting your first Yen-Slurm job
-
-Navigate to `~/yens-onboarding-2025/exercises/slurm` directory:
-
-```
-cd ~/yens-onboarding-2025/exercises/slurm
-```
-
-Let’s make your first slurm job script. You can do this in JupyterHub usign Text Editor.
-
-1. Make a new file in the `slurm` directory called `my_first_job.slurm`.
-
-2. Start the file with the bash shebang line:
-
-   ```
-   #!/bin/bash
-   ```
-
-   This line is called a "shebang." It tells the system to run the script using the Bash shell interpreter (`/bin/bash`). This ensures consistent behavior for shell commands like `cd`, `source`, and environment variables — regardless of the user's default shell.
-
-3. Add Slurm job configuration flags that request appropriate resources (replace `your_email` with your Stanford email):  
-
-   ```
-   #SBATCH --job-name=my-first-job
-   #SBATCH --output=my-first-job.out
-   #SBATCH --time=10:00
-   #SBATCH --mem=4G
-   #SBATCH --cpus-per-task=1
-   #SBATCH --mail-type=ALL
-   #SBATCH --mail-user=your_email@stanford.edu
-   ```
-
-   The `--output=my-first-job.out` flag tells Slurm to save all job outputs (printed to screen) in a text file named `my-first-job.out` in the same directory (`~/yens-onboarding-2025/exercises/slurm`).
-
-4. Finally, add a line to print a message: 
-
-   ```
-   echo "Hello there!" 
-   ```
-
-Save this file.
-
-🟩/🟥
-
-### 💻 Let’s submit it:
-
-Run:
-```
-sbatch my_first_job.slurm
-```
-You’ll see output like:
-
-```
-Submitted batch job 123456
-```
-
-The `123456` is a job ID which is unique for every job on the cluster. 
-
-## Monitoring slurm jobs
-
-View the job queue:
-
-```
-squeue 
-```
-
-Or filter to just your jobs:
-```
-squeue -u $USER
-```
-
-Cancel a job if needed:
-```
-scancel <job-id>
-```
-
-## Checking results
-After the job completes:
-
-Look at the `.out` file created:
-```
-cat my-first-job.out
-```
-
-You should see:
-
-```
-Hello there!
-```
-
-If you included your email in `--mail-user`, you’ll also receive an email from Slurm when the job starts and ends.
+With those basics in place, we’re ready to dive deeper into running and scaling jobs on the cluster.
 
 ## Running a python script via slurm
 Let’s now run a real script using Slurm — and discuss paths, resource requests, and how to organize logs.
@@ -1001,3 +875,63 @@ Your job is to edit that document, and fill in the following details so it's eas
 When you're done, please put a green sticky note 🟩 on the back of your laptop so we know you're done.
 
 
+---
+
+## Summary of the Course
+
+Over these two sessions, you’ve learned to:
+
+- Connect to the Yens via SSH and JupyterHub  
+- Navigate the filesystem and move data to/from the cluster  
+- Create and activate reproducible Python environments  
+- Run code interactively and measure resource use (CPU, memory, runtime)  
+- Submit and monitor jobs with Slurm  
+- Debug and fix common job script errors  
+- Handle jobs that fail for memory or time reasons  
+- Run real research workflows with checkpointing and batch jobs  
+- Scale up with job arrays for parallel processing  
+- Share results and document your workflow for collaborators  
+
+✅ You now have the full workflow: from logging in and setting up an environment, through running and scaling jobs, to sharing results.
+
+---
+## Resources for Further Learning
+
+Many of the skills you learned here are **not unique to the Yens**. If you want to deepen your foundations, these resources are excellent starting points:
+
+- [The Carpentries](https://carpentries.org/): beginner-friendly lessons on the command line, Git, Python, R, and more  
+- [HPC Carpentry](https://hpc-carpentry.github.io/): lessons on using high-performance computing systems  
+- [Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)  
+- [Software Carpentry: Version Control with Git](https://swcarpentry.github.io/git-novice/)  
+
+---
+
+## Where to Get Help
+
+- **RCpedia** — [rcpedia.stanford.edu](https://rcpedia.stanford.edu/) (searchable documentation for research computing at GSB)  
+- **Slack** — Join the `#gsb-yen-users` channel to ask/answer questions and see announcements  
+- **Email** — [gsb_darcresearch@stanford.edu](mailto:gsb_darcresearch@stanford.edu)  
+
+---
+
+## Tips Before Asking for Help
+
+When something doesn’t work:
+
+1. **Try debugging yourself first**  
+   - Read the error messages carefully  
+   - Check the Slurm log files (`.out`)  
+   - Use AI assistants or a buddy to reason through the problem  
+
+2. **When reaching out for help, share three things:**  
+   - What you tried (the command/script you ran)  
+   - What you expected to happen  
+   - What actually happened (error messages, output)  
+
+This helps us help you much faster — and it makes you a stronger cluster user.  
+
+---
+
+🎉 **Congratulations — you’ve completed Yens Onboarding!**  
+You now know how to connect, run, debug, and scale jobs on the cluster.  
+Your next step is to bring these skills into your own research projects — and remember, you’re not alone: RCpedia, Slack, and the DARC team are here to help you along the way.
