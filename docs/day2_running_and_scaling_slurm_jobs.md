@@ -53,7 +53,7 @@ The scheduler finds resources for you. Small jobs usually start faster than larg
 
 ### Summary: Interactive vs. Scheduled Yens
 
-| **Interactive Yens** (`yen1`–`yen5`)                                                                 | **Scheduled Yens (Slurm cluster)** (`yen-slurm`)                                                                 |
+| **Interactive Yens** (`yen1`–`yen5`)                                                                 | **Scheduled Yens** (`yen-slurm`)                                                                 |
 |-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | SSH directly to a node                                                                                | You do **not** SSH to compute nodes directly                                                                     |
 | 5 interactive nodes                                                                                   | 10 scheduled nodes                                                                                                |
@@ -64,7 +64,7 @@ The scheduler finds resources for you. Small jobs usually start faster than larg
 | Must stay under [interactive node limits](https://rcpedia.stanford.edu/_policies/user_limits/)        | Can exceed interactive limits (e.g., more RAM, longer runtimes)                                                  |
 | Good for quick testing, small jobs, and notebooks                                                     | Best for large-scale or long-running research workflows                                                           |
 | No job tracking beyond your own terminal                                                              | Slurm tracks job usage (CPU, RAM, time) and reports back                                                          |
-| —                                                                                                     | **12 GPUs available; all GPU jobs must use Slurm**                                                                |
+| No GPUs                                                                                               | **12 GPUs available; all GPU jobs must use Slurm**                                                                |
 
 With this distinction in mind, let’s now practice running a **real script** on the scheduler.
 
