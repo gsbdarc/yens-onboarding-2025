@@ -275,6 +275,8 @@ TODO
 
 ✏️ Yen-Slurm Cluster
 
+✏️ Kitchen demo!
+
 
 ## 💻 Run a mystery python script
 
