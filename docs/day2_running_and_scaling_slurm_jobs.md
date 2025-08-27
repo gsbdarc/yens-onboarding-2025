@@ -38,6 +38,37 @@ By the end of today you will be able to:
 
 With those basics in place, we’re ready to dive deeper into running and scaling jobs on the cluster.
 
+## The Yen-Slurm Scheduler
+On Day 1, we used the **interactive Yens** (`yen1`–`yen5`) for SSH, JupyterHub, and small jobs. These machines are great for interactive work and testing but have **community limits** so that everyone shares the resources (CPUs and RAM) — see [Interactive Node Limits](https://rcpedia.stanford.edu/_policies/user_limits/).
+
+For larger or longer research jobs, we use the **Yen-Slurm cluster**. This is a separate set of nodes (`yen-slurm`) managed by the **Slurm scheduler**. With Slurm you submit jobs asking for:
+- **CPU cores**
+- **RAM**
+- **Time**
+
+The scheduler finds resources for you. Small jobs usually start faster than large ones. Unlike interactive Yens, resources are guaranteed and **not shared** once allocated.
+
+> For details about partitions, limits, and advanced options, see the [Slurm User Guide](https://rcpedia.stanford.edu/_user_guide/slurm/).
+{: .tip }
+
+### Summary: Interactive vs. Scheduled Yens
+
+| **Interactive Yens** (`yen1`–`yen5`)                                                                 | **Scheduled Yens (Slurm cluster)** (`yen-slurm`)                                                                 |
+|-------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| SSH directly to a node                                                                                | You do **not** SSH to compute nodes directly                                                                     |
+| 5 interactive nodes                                                                                   | 10 scheduled nodes                                                                                                |
+| Run jobs interactively in a terminal (`python my_script.py`)                                          | Submit jobs via Slurm submission scripts (`sbatch my_script.slurm`)                                              |
+| Jupyter notebooks supported                                                                           | No Jupyter notebooks                                                                                              |
+| No wait for CPUs/RAM — but shared with other users                                                    | May wait in queue for resources — but resources are guaranteed once scheduled                                     |
+| Cores and memory are **shared** between users                                                         | Cores and memory are **exclusive** to your job                                                                   |
+| Must stay under [interactive node limits](https://rcpedia.stanford.edu/_policies/user_limits/)        | Can exceed interactive limits (e.g., more RAM, longer runtimes)                                                  |
+| Good for quick testing, small jobs, and notebooks                                                     | Best for large-scale or long-running research workflows                                                           |
+| No job tracking beyond your own terminal                                                              | Slurm tracks job usage (CPU, RAM, time) and reports back                                                          |
+| —                                                                                                     | **12 GPUs available; all GPU jobs must use Slurm**                                                                |
+
+With this distinction in mind, let’s now practice running a **real script** on the scheduler.
+
+---
 ## Running a python script via slurm
 Let’s now run a real script using Slurm — and discuss paths, resource requests, and how to organize logs.
 
