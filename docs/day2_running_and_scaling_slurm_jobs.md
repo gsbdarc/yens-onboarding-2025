@@ -572,13 +572,12 @@ After submission:
 ## Scaling Up to Process Many Files
 Now let’s move from a single example to 100 filings. 
 
-We already have a file named `form_3_100.csv` in `data` directory containing 100 rows, each with a path to an SEC Form 3 filing on the Yens.
+We already have a file named `form_3_100.csv` in `/scratch/shared/yens-onboarding-2025/data` directory containing 100 rows, each with a path to an SEC Form 3 filing on the Yens.
 
 Let’s take a look:
 
 ```
-cd exercises
-head form_3_100.csv
+head /scratch/shared/yens-onboarding-2025/data/form_3_100.csv
 ```
 
 You should see a column called `filepath` with full paths to `.txt` filings.
@@ -630,7 +629,7 @@ Edit the slurm file to include your email.
 Then submit from `slurm` directory:
 ```
 cd exercises/slurm
-sbatch slurm/extract_form_3_batch.slurm
+sbatch extract_form_3_batch.slurm
 ```
 
 Track it as usual:
