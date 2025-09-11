@@ -98,22 +98,6 @@ You’ll be prompted for Duo authentication. After logging in, check that the fo
 🟩/🟥
 
 
-## Access the Yens on the web 
-To access JupyterHub, choose any of the following:
-
-- <a href="https://yen1.stanford.edu" target="_blank">`yen1` https://yen1.stanford.edu</a>
-- <a href="https://yen2.stanford.edu" target="_blank">`yen2` https://yen2.stanford.edu</a>
-- <a href="https://yen3.stanford.edu" target="_blank">`yen3` https://yen3.stanford.edu</a>
-- <a href="https://yen4.stanford.edu" target="_blank">`yen4` https://yen4.stanford.edu</a>
-- <a href="https://yen5.stanford.edu" target="_blank">`yen5` https://yen5.stanford.edu</a>
-
-Let's navigate by double clicking on folders to find an image we copied from our local machine. 
-
-> You can double click on it to view it natively in JupyterHub.
-{: .tip }
-
-
-
 
 ## Understanding paths and modules on the Yens
 TODO
@@ -173,7 +157,7 @@ cat scripts/extract_form_3_one_file.py
 
 Before we can run this script, every user needs to have packages that the script imports installed. This is true for other languages like R and Julia as well.
 
-  1. You should have a terminal connected to the Yens open or terminal in JupyteHub.
+  1. You should have a terminal connected to the Yens open or terminal in JupyterHub.
 
   2. You should be in the `~/yens-onboarding-2025/exercises` directory
 
@@ -188,8 +172,54 @@ cat requirements.txt
 ❓ Why is it useful?
 
 
+## Access the Yens on the web 
+To access JupyterHub, choose any of the following:
+
+- <a href="https://yen1.stanford.edu" target="_blank">`yen1` https://yen1.stanford.edu</a>
+- <a href="https://yen2.stanford.edu" target="_blank">`yen2` https://yen2.stanford.edu</a>
+- <a href="https://yen3.stanford.edu" target="_blank">`yen3` https://yen3.stanford.edu</a>
+- <a href="https://yen4.stanford.edu" target="_blank">`yen4` https://yen4.stanford.edu</a>
+- <a href="https://yen5.stanford.edu" target="_blank">`yen5` https://yen5.stanford.edu</a>
+
+Let's navigate by double-clicking on folders to find an image we copied from our local machine. 
+
+> You can double-click on it to view it natively in JupyterHub.
+{: .tip }
+
+
+#### What is a default workflow on the Yens cluster?
+1. Perform Development and Testing on JupyterHub in a notebook
+2. Generate a script that can be run on the terminal
+3. Run the script on the terminal (interactive yen or batch job)
+
+
+> **You can always type Shift+Enter to run a cell in Jupyter Notebook.**
+{: .tip }
+
+Let's start with a super quick demo of Jupyter Notebook.
+1. In your home directory create a new notebook called `Test.ipynb`. (Right click to Rename your notebook)
+2. Add a code cell with the following content: `import math` (What kernel are you using?)
+3. Add a markdown cell with the following title `# Variable declaration `
+4. Add a new code cell with the following content: `x = 16`
+5. Add a new code cell with the following content: `math.sqrt(x)` 
+6. Run the cells (Restart your kernel and run the cells in a different order)
+
+🟩/🟥
 
 ## 💻 Create a python virtual environment
+
+Virtual environments allow you to manage dependencies for different projects separately. This is important because different projects may require different versions of libraries, and using virtual environments helps avoid conflicts between them.
+
+Quick demonstration of the need for virtual environments:
+
+1. Open a terminal and ssh into the yens
+2. Access JupyterHub and open a terminal there
+3. Run the command `which python3` in both terminals. What do you notice?
+
+
+🟩/🟥
+
+
 Let’s make a virtual environment from the `requirements.txt` file:
 
 Run the following commands in the `~/yens-onboarding-2025/exercises` directory:
@@ -269,13 +299,48 @@ Let’s load your OpenAI API key (or any secret) using `dotenv`.
 This allows you to use secrets without hardcoding them into scripts. 
 
 ## Cluster Resources
-TODO
+
+![DARC Cluster Resources](assets/images/darc-sep-2024.jpg)
 
 ✏️ Interactive Yens
 
+![Sharing is Caring](assets/images/sharing-is-caring.jpeg)
+
+Lets take a look at one of the interactive nodes. There are 5 interactive nodes (yen1-yen5), each with a large number of cores and RAM.
+
+- The Yens **Share** memory across all nodes on Yen Storage.
+   That means whenever you save something to your home folder on Yen1, you can access it from Yen2, Yen3, Yen4, or Yen5. Project folders are also shared across all nodes.
+
+! Can put image of yen1 here and progressively zoom out to show all 5 yens and then the whole cluster.
+
+- The interactive Yens **Share** CPU and RAM across all users logged into that node.
+   This means that if one user is running a resource-intensive job on an interactive Yen node, it can affect the performance of other users on the same node.
+
 ✏️ Yen-Slurm Cluster
 
+The Yen-Slurm has its own set of nodes that are separate from the interactive yens. These nodes are used to run batch jobs that you submit using the Slurm workload manager.
+
+Slurm is a method for managing and scheduling jobs on a cluster. It allows you to submit jobs that can run in the background, request specific resources (like CPU, memory, and time), and manage multiple jobs efficiently.
+
+Everyone **Shares** Yen-Slurm nodes but when you submit a job, you are allocated your own resources for the duration of the job.
+
+- If you ask for 50 CPUs and 200GB of RAM for 24 hours, those resources are yours
+- If you ask for 512 CPU and 2TB of RAM for 24 hours, those resources are yours
+
+What is the catch? 
+
+
+In order to help you get the jobs you need done we offer a variety of slurm `partitions` (queues) that have different limits on resources and time.
+
+- normal: 512 CPUs, 3,000 GB RAM, max 2 days per job (2 hours default)
+- long: 50 CPUs, 3,000 GB RAM, max 7 days per job (2 hours default)
+- dev: 2 CPUs,  46 GB RAM, max 2 hours per job (1 hour default)
+- gpu: 64 CPUs,  250 GB RAM, max 1 day per job (2 hours default)
+
+
 ✏️ Kitchen demo!
+
+I need some volunteers to help me cook a meal.
 
 
 ## 💻 Run a mystery python script
@@ -284,7 +349,7 @@ Login to the Yens.
 
 Take a note of which interactive yen (yen[1-5]) you are on. Then, open a new terminal (or second tab if using Jupyter), and connect to the **same** yen.
 
-Now you should have two terminals, both conneted to the same interactive yen.
+Now you should have two terminals, both connected to the same interactive yen.
 
 In one of the terminals, run a mystery script four times:
 
@@ -327,7 +392,7 @@ Navigate to `~/yens-onboarding-2025/exercises/slurm` directory:
 cd ~/yens-onboarding-2025/exercises/slurm
 ```
 
-Let’s make your first slurm job script. You can do this in JupyterHub usign Text Editor.
+Let’s make your first slurm job script. You can do this in JupyterHub using Text Editor.
 
 1. Make a new file in the `slurm` directory called `my_first_job.slurm`.
 
