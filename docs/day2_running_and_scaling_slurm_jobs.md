@@ -39,7 +39,7 @@ By the end of today you will be able to:
 With those basics in place, we’re ready to dive deeper into running and scaling jobs on the cluster.
 
 ## The Yen-Slurm Scheduler
-On Day 1, we used the **interactive Yens** (`yen1`–`yen5`) for SSH, JupyterHub, and small jobs. These machines are great for interactive work and testing but have **community limits** so that everyone shares the resources (CPUs and RAM) — see [Interactive Node Limits](https://rcpedia.stanford.edu/_policies/user_limits/).
+On Day 1, we used the **interactive Yens** (`yen1`–`yen5`) for SSH, JupyterHub, and small jobs. These machines are great for interactive work and testing but have **community limits** so that everyone shares the resources (CPUs and RAM) — see <a href="https://rcpedia.stanford.edu/_policies/user_limits" target="_blank">Interactive Node Limits</a>. 
 
 For larger or longer research jobs, we use the **Yen-Slurm cluster**. This is a separate set of nodes (`yen-slurm`) managed by the **Slurm scheduler**. With Slurm you submit jobs asking for:
 - **CPU cores**
@@ -48,8 +48,8 @@ For larger or longer research jobs, we use the **Yen-Slurm cluster**. This is a 
 
 The scheduler finds resources for you. Small jobs usually start faster than large ones. Unlike interactive Yens, resources are guaranteed and **not shared** once allocated.
 
-> For details about partitions, limits, and advanced options, see the [Slurm User Guide](https://rcpedia.stanford.edu/_user_guide/slurm/).
-{: .tip }
+> For details about partitions, limits, and advanced options, see the <a href="https://rcpedia.stanford.edu/_user_guide/slurm/" target="_blank">Slurm User Guide</a>.
+{: .tip 
 
 ### Summary: Interactive vs. Scheduled Yens
 
@@ -162,7 +162,7 @@ As we know, this script uses multiple CPU cores, so we’ll request **10 cores**
 3. Name the file `mystery_script.slurm`.
 
 #### About the `logs/` folder
-The line `#SBATCH --output=logs/mystery-%j.out` tells Slurm to write all job output (stdout and stderr) to a file inside the `logs/` folder. The `%j` gets replaced by the Slurm job ID, so each job has its own unique log file.
+The line `#SBATCH --output=logs/mystery-%j.out` tells Slurm to write all job outputs (stdout and stderr) to a file inside the `logs/` folder. The `%j` gets replaced by the Slurm job ID, so each job has its own unique log file.
 
 Before submitting the job, we must create the `logs` directory:
 
@@ -556,10 +556,10 @@ python scripts/extract_form_3_one_file.py
 
 ### ✅ Submit it!
 
-From the `exercises/` directory, run:
+From the `exercises/slurm` directory, run:
 
 ```
-sbatch slurm/extract_form_3_one_file.slurm
+sbatch extract_form_3_one_file.slurm
 ```
 
 After submission:
