@@ -100,7 +100,50 @@ You’ll be prompted for Duo authentication. After logging in, check that the fo
 
 
 ## Understanding paths and modules on the Yens
-TODO
+
+Knowing where things are on your filesystem is very important, and a major 'gotcha' in terms of bugs you'll find in your scripts.
+
+On a filesystem, files have a specific address, which we'll call the "path" to that file. Take a look in your home directory on the Yens where you now have a directory called `test_folder_from_local`. Go ahead and list the contents of this directory from the terminal.
+
+You have to type something like `ls [insert path here]`
+🟩/🟥
+
+Here are things you could have typed:
+
+```
+ls test_folder_from_local
+ls ~/test_folder_from_local
+ls /home/users/$USER/test_folder_from_local
+cd test_folder_from_local && ls
+ls $PWD/test_folder_from_local
+```
+
+These use one (or more) of the following approaches:
+
+* Providing an **absolute path**, which starts with `/`
+* Providing a **relative path**, which depends on your working directory
+* Using a shortcut (`~`) or an **environment variable** (`$USER`)
+
+To invoke any software on the Yens, you have to either use its **path** directly, or it has to be in a special list of places. Let's look at this a little more.
+
+1. Call `python3 -c "print(1+1)"` -- this sends a specific command to python3 and executes it.
+2. Find the absolute path of the python executable by typing `which python3`. List the contents of the directory that `python3` is in.
+3. The special list of places I referred to is an environment variable called `$PATH`. Type `echo $PATH` to print out the contents.
+
+🟩/🟥
+
+Managing different *versions* of software that can be installed in different locations but might be called the same thing can be very confusing! One way of managing this is to use the `module` system, which manages your environment to make software easily accessible with the right paths and libraries.
+
+Let's use it and explore.
+
+1. Type `module avail` to list all of the available software in the module system.
+2. Type `module load R/3.6.3` (Hint: tab autocomplete can save you time!)
+3. Type `R` to start R -- look at the welcome message to confirm that it's version 3.6.3.
+4. Type `module list` to see your currently loaded modules.
+5. Print out, or echo, the contents of your `$PATH` variable. What is different?
+6. Type `module unload R/3.6.3`, then try to start `R`. Note the error that you get, and then check your `$PATH` and note what changed.
+
+🟩/🟥
 
 ✏️ All this path and version stuff is important for reproducibility. Let’s take a beat to think through what reproducibility means in research.
 
