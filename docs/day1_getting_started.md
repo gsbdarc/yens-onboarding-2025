@@ -367,13 +367,14 @@ You can now run code that uses packages from your environment. If you can’t, l
 
 Lets take a look at one of the interactive nodes. There are 5 interactive nodes (yen1-yen5), each with a large number of cores and RAM.
 
-- **Shared** storage across nodes
+- **Shared** storage across nodes:
+  
 All interactive Yen nodes (yen1–yen5) mount the same central storage system (ZFS-backed). Anything saved in your home directory on one node is immediately available on the others. Project directories are also mounted across all nodes
 
-- Per-node CPU and RAM
-Each interactive Yen node has its own [CPU cores and memory](https://rcpedia.stanford.edu/_getting_started/yen-servers/#overview-of-the-yen-computing-infrastructure). These resources are **shared** among all users logged into that node. If someone runs a resource-intensive job, it can affect the responsiveness for others.
-
-- Limitations there are limits on how many [CPU cores and how much RAM](https://rcpedia.stanford.edu/_policies/user_limits/#interactive-compute-limits) you can use at once on an interactive Yen node. This is to ensure fair access for all users.
+- Per-node CPU and RAM:  
+Each **interactive** Yen node has its own [CPU cores and memory](https://rcpedia.stanford.edu/_getting_started/yen-servers/#overview-of-the-yen-computing-infrastructure). These resources are **shared** among all users logged into that node. If someone runs a resource-intensive job, it can affect the responsiveness for others
+- Limitations: <br>
+There are limits on how many [CPU cores and how much RAM](https://rcpedia.stanford.edu/_policies/user_limits/#interactive-compute-limits) you can use at once on an interactive Yen node. This is to ensure fair access for all users.
 
 # ✏️ Yen-Slurm Cluster
 
