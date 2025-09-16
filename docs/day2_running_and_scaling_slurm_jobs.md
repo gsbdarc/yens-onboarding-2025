@@ -324,6 +324,7 @@ Each one will fail for a different reason — your job is to figure out why by i
 5. Resubmit once fixed:
 
    ```
+   cd ../slurm
    sbatch fix_me.slurm
    ```
 
@@ -393,7 +394,8 @@ Let’s write a script that tries to allocate too much memory.
 1. Create the file:
 
    ```bash
-   touch slurm/fail_not_enough_memory.slurm
+   cd ~/yens-onboarding-2025/exercises/slurm
+   touch fail_not_enough_memory.slurm
    ```
 
 2. Add the following:
@@ -429,7 +431,8 @@ Let’s write a script that tries to allocate too much memory.
 4. Submit:
  
    ```
-   sbatch slurm/fail_not_enough_memory.slurm
+   cd ~/yens-onboarding-2025/exercises/slurm
+   sbatch fail_not_enough_memory.slurm
    ```
 
 🟩 / 🟥
@@ -439,7 +442,8 @@ Let’s write a script that tries to allocate too much memory.
 1. Create the file:
 
    ```
-   touch slurm/fail_not_enough_time.slurm
+   cd ~/yens-onboarding-2025/exercises/slurm
+   touch fail_not_enough_time.slurm
    ```
 
 2. Add this script:
@@ -472,7 +476,8 @@ Let’s write a script that tries to allocate too much memory.
 4. Submit:
 
    ```
-   sbatch slurm/fail_not_enough_time.slurm
+   cd ~/yens-onboarding-2025/exercises/slurm
+   sbatch fail_not_enough_time.slurm
    ```
 
 🟩 / 🟥
@@ -853,8 +858,8 @@ cat scripts/extract_form_3_one_from_csv.py
 
 ### Run it
 ```
-cd ~/yens-onboarding-2025/exercises
-sbatch slurm/extract_form_3_array.slurm
+cd ~/yens-onboarding-2025/exercises/slurm
+sbatch extract_form_3_array.slurm
 ```
 
 Watch the queue:
