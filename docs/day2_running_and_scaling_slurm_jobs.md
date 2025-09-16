@@ -74,7 +74,7 @@ Let’s now run a real script using Slurm — and discuss paths, resource reques
 
 ---
 
-### 📁 Step 1: Understand paths on the cluster
+### 📁 Understand paths on the cluster
 
 **Slurm job working directory behavior**:
 
@@ -124,9 +124,9 @@ That line will only work if the current working directory contains the `scripts/
 
 - If you ran `sbatch` from `~/yens-onboarding-2025/exercises/`, it works.
 
-- If you ran it from `slurm/`, it will fail unless you `cd ..` or change paths.
+- If you ran it from `slurm/`, it will fail unless you `cd ..` or change paths inside the slurm script before calling `python mystery_script.py`.
 
-### 📝 Step 2: Create a slurm script to run `mystery_script.py`
+### Create a slurm script to run `mystery_script.py`
 Let’s write a new Slurm script that runs the Python script `scripts/mystery_script.py`.
 
 As we know, this script uses multiple CPU cores, so we’ll request **10 cores**.
@@ -196,22 +196,26 @@ Save and exit the file.
 
 🟩 / 🟥
 
-### Step 3: Submit the job to run `mystery_script.py`
+### Submit the job to run `mystery_script.py`
 
 We’re now ready to submit a real python job to the Yen-Slurm cluster.
 
 #### Before submission:
-- You created `run_mystery_script.slurm` inside the `slurm/` folder
+- You created `mystery_script.slurm` inside the `slurm/` folder
 - You created a `logs/` folder to capture output
 
 Make sure you're in the `slurm/` folder before submitting so that relative paths in the script work correctly:
 
 ```bash
 cd ~/yens-onboarding-2025/exercises/slurm
+```
+
+Submit: 
+```
 sbatch mystery_script.slurm
 ```
 
-### Step 4: Monitor the job
+### Monitor the job
 To check the status of your job:
 
 ```
@@ -221,7 +225,7 @@ squeue -u $USER
 You’ll see a table with columns like JOBID, NAME, STATE, TIME, and NODELIST.
 Your job may show up as `PD` (pending), `R` (running), or disappear when it’s finished.
 
-### Step 5: View the output log
+###  View the output log
 Once the job finishes, go to your `logs/` folder and inspect the output:
 
 ```
