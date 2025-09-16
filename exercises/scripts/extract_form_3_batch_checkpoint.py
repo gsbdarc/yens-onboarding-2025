@@ -52,11 +52,13 @@ Return valid JSON matching the provided Pydantic model.
 
 for path in filepaths:
     if path in processed:
+        print(f"File {path} already processed. Skipping.")
         continue
 
     with open(path, "r", encoding="utf-8", errors="replace") as f:
         filing_text = f.read()
-
+    print(f"Processing file {path}.")
+ 
     resp = client.responses.parse(
         model="gpt-4.1-nano",
         input=[

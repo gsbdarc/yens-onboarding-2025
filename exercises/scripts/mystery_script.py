@@ -12,6 +12,7 @@ def crunch_numbers():
 if __name__ == "__main__":
     # On a shared cluster, DO NOT use multiprocessing.cpu_count()
     num_cores = 10  
+    print(f"Starting the script on {num_cores} cores...")
     processes = []
 
     for _ in range(num_cores):
@@ -21,3 +22,4 @@ if __name__ == "__main__":
 
     for p in processes:
         p.join()
+    print(f"Done.")

@@ -49,7 +49,7 @@ print(f"Processing {len(filepaths)} filings...")
 for path in filepaths:
     with open(path, "r") as f:
         filing_text = f.read()
-
+    print(f"Processing file {path}")
     response = client.responses.parse(
         model="gpt-4.1-nano",
         input=[
