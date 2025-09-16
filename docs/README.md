@@ -33,7 +33,7 @@ By the end of the course, you will be able to:
 - **Motivation exercise:** run a “mystery” Python script interactively, watch CPU/RAM/time with `htop`, `userload`, and `time`.
 - **Your first Slurm job** (hello-world) to close Day 1.
 
-### Day 2 — Running and scaling jobs
+### Day 2 — Running and scaling jobs (scheduled Yens)
 - Running real scripts with Slurm: working directories, logs, monitoring with `squeue`, canceling jobs.
 - **Debugging lab:** fix common broken Slurm scripts and learn a systematic log-first workflow.
 - Handling resource failures (out-of-memory, time limits) and how to size jobs.
