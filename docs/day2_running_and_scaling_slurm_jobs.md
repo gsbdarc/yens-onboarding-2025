@@ -49,7 +49,7 @@ For larger or longer research jobs, we use the **Yen-Slurm cluster**. This is a 
 The scheduler finds resources for you. Small jobs usually start faster than large ones. Unlike interactive Yens, resources are guaranteed and **not shared** once allocated.
 
 > For details about partitions, limits, and advanced options, see the <a href="https://rcpedia.stanford.edu/_user_guide/slurm/" target="_blank">Slurm User Guide</a>.
-{: .tip 
+{: .tip } 
 
 ### Summary: Interactive vs. Scheduled Yens
 
