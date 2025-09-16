@@ -361,14 +361,16 @@ You can now run code that uses packages from your environment. If you can’t, l
 
 ![DARC Cluster Resources](assets/images/yen-computing-infrastructure.png)
 
+✏️ Let's pretend you are a cook.
+
+
 # ✏️ Interactive Yens
 
 ![Sharing is Caring](assets/images/sharing_is_caring.jpeg)
 
 Lets take a look at one of the interactive nodes. There are 5 interactive nodes (yen1-yen5), each with a large number of cores and RAM.
 
-- **Shared** storage across nodes:
-  
+- **Shared** storage across nodes: <br>
 All interactive Yen nodes (yen1–yen5) mount the same central storage system (ZFS-backed). Anything saved in your home directory on one node is immediately available on the others. Project directories are also mounted across all nodes
 
 - Per-node CPU and RAM:  
@@ -392,7 +394,7 @@ While all users share access to the Yen-Slurm cluster, Slurm allocates dedicated
 - If you ask Slurm for 50 CPUs and 200 GB of RAM for 24 hours, those resources are reserved for your job.
 - If you ask for 512 CPUs and 2 TB of RAM for 24 hours, those resources are also reserved for your job.
 
-❓ What’s the catch?
+❓ What’s the catch? <br>
 Slurm can only schedule your job if those resources are actually available. If you request more than the cluster can provide, or more than is free at the moment, your job will sit in the queue until the resources free up. Large jobs may wait a long time (or never run at all) if they [exceed policy limits or capacity](https://rcpedia.stanford.edu/_policies/user_limits/#interactive-compute-limits).
 
 
