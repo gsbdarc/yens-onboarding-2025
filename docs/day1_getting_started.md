@@ -232,9 +232,19 @@ Let’s look at the script called `extract_form_3_one_file.py` inside the `scrip
 cat scripts/extract_form_3_one_file.py
 ```
 
-❓: What is the script doing?
+❓: What is the script doing? (Let's look at a high level)
+
+### Purpose 
+
+- Import libraries
+- Load secrets
+- Define schema for LLM model output
+- Define LLM parameters
+- Call API
+- Handle API return
 
 
+#### Understanding the imported libraries
 Before we can run this script, every user needs to have packages that the script imports installed. This is true for other languages like R and Julia as well.
 
   1. You should have a terminal connected to the Yens open or terminal in JupyterHub.
@@ -251,6 +261,28 @@ cat requirements.txt
 
 ❓ Why is it useful?
 
+#### Securely using environment variables
+Let’s load your OpenAI API key (or any secret) using `dotenv`.
+
+1. 💻 We created a hidden file to store secrets. Let's look at it:
+
+   ```
+   cat /scratch/shared/yens-onboarding-2025/.env
+   ```
+
+2. 🐍 Load the variable in Python:
+
+   ```python
+   import os
+   from dotenv import load_dotenv
+   load_dotenv('/scratch/shared/yens-onboarding-2025/.env')
+   api_key = os.getenv("OPENAI_API_KEY")
+   ```
+
+This allows you to use secrets without hardcoding them into scripts. 
+
+
+
 ## 💻 Create a python virtual environment
 
 A virtual environment lets you manage project dependencies in isolation. This is useful because different projects often require different versions of libraries, and keeping them separate prevents conflicts.
@@ -266,7 +298,6 @@ Compare the outputs, notice how the paths differ? That’s why virtual environme
 
 
 🟩/🟥
-
 
 Let’s make a virtual environment from the `requirements.txt` file:
 
@@ -325,25 +356,6 @@ You can now run code that uses packages from your environment. If you can’t, l
 
 🟩/🟥
 
-## Securely using environment variables
-Let’s load your OpenAI API key (or any secret) using `dotenv`.
-
-1. 💻 We created a hidden file to store secrets. Let's look at it:
-
-   ```
-   cat /scratch/shared/yens-onboarding-2025/.env
-   ```
-
-2. 🐍 Load the variable in Python:
-
-   ```python
-   import os
-   from dotenv import load_dotenv
-   load_dotenv('/scratch/shared/yens-onboarding-2025/.env')
-   api_key = os.getenv("OPENAI_API_KEY")
-   ```
-
-This allows you to use secrets without hardcoding them into scripts. 
 
 ## Cluster Resources
 
