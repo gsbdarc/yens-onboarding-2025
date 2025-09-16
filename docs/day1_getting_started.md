@@ -161,6 +161,43 @@ cd yens-onboarding-2025/exercises
 ```
 🟩/🟥
 
+
+## Access the Yens on the web 
+To access JupyterHub, choose any of the following:
+
+- <a href="https://yen1.stanford.edu" target="_blank">`yen1` https://yen1.stanford.edu</a>
+- <a href="https://yen2.stanford.edu" target="_blank">`yen2` https://yen2.stanford.edu</a>
+- <a href="https://yen3.stanford.edu" target="_blank">`yen3` https://yen3.stanford.edu</a>
+- <a href="https://yen4.stanford.edu" target="_blank">`yen4` https://yen4.stanford.edu</a>
+- <a href="https://yen5.stanford.edu" target="_blank">`yen5` https://yen5.stanford.edu</a>
+
+Let's navigate by double-clicking on folders to find an image we copied from our local machine. 
+
+> You can double-click on it to view it natively in JupyterHub.
+{: .tip }
+
+
+#### Default Workflow on the Yens Cluster?
+   1.	Develop and test code in JupyterHub notebooks.
+   2.	Convert the notebook to a script.
+   3.	Run the script from the terminal (interactive yen or batch job).
+
+
+> **You can always type Shift+Enter to run a cell in Jupyter Notebook.**
+{: .tip }
+
+#### Quick Jupyter Notebook Demo
+
+1. In your home directory, create a new notebook named Test.ipynb.
+2. Add a code cell: import math. (❓Check your kernel.)
+3. Add a markdown cell: # Variable declaration.
+4. Add a code cell: x = 16.
+5. Add another code cell: math.sqrt(x).
+6. Run the cells. Try restarting the kernel and running them in a different order.
+
+🟩/🟥
+
+
 ## Run scripts from the terminal
 
 💻 Create a Python script:
@@ -214,50 +251,18 @@ cat requirements.txt
 
 ❓ Why is it useful?
 
-
-## Access the Yens on the web 
-To access JupyterHub, choose any of the following:
-
-- <a href="https://yen1.stanford.edu" target="_blank">`yen1` https://yen1.stanford.edu</a>
-- <a href="https://yen2.stanford.edu" target="_blank">`yen2` https://yen2.stanford.edu</a>
-- <a href="https://yen3.stanford.edu" target="_blank">`yen3` https://yen3.stanford.edu</a>
-- <a href="https://yen4.stanford.edu" target="_blank">`yen4` https://yen4.stanford.edu</a>
-- <a href="https://yen5.stanford.edu" target="_blank">`yen5` https://yen5.stanford.edu</a>
-
-Let's navigate by double-clicking on folders to find an image we copied from our local machine. 
-
-> You can double-click on it to view it natively in JupyterHub.
-{: .tip }
-
-
-#### What is a default workflow on the Yens cluster?
-1. Perform Development and Testing on JupyterHub in a notebook
-2. Generate a script that can be run on the terminal
-3. Run the script on the terminal (interactive yen or batch job)
-
-
-> **You can always type Shift+Enter to run a cell in Jupyter Notebook.**
-{: .tip }
-
-Let's start with a super quick demo of Jupyter Notebook.
-1. In your home directory create a new notebook called `Test.ipynb`. (Right click to Rename your notebook)
-2. Add a code cell with the following content: `import math` (What kernel are you using?)
-3. Add a markdown cell with the following title `# Variable declaration `
-4. Add a new code cell with the following content: `x = 16`
-5. Add a new code cell with the following content: `math.sqrt(x)` 
-6. Run the cells (Restart your kernel and run the cells in a different order)
-
-🟩/🟥
-
 ## 💻 Create a python virtual environment
 
-Virtual environments allow you to manage dependencies for different projects separately. This is important because different projects may require different versions of libraries, and using virtual environments helps avoid conflicts between them.
+A virtual environment lets you manage project dependencies in isolation. This is useful because different projects often require different versions of libraries, and keeping them separate prevents conflicts.
 
-Quick demonstration of the need for virtual environments:
+#### Why Virtual Environments Matter
 
-1. Open a terminal and ssh into the yens
-2. Access JupyterHub and open a terminal there
-3. Run the command `which python3` in both terminals. What do you notice?
+Try this quick demo:
+1. Open a terminal and SSH into the Yens.
+2. Open a terminal from JupyterHub.
+3. Run `which python3` in both terminals.
+
+Compare the outputs, notice how the paths differ? That’s why virtual environments are important: they give you control over which Python installation and dependencies your project uses.
 
 
 🟩/🟥
@@ -320,7 +325,6 @@ You can now run code that uses packages from your environment. If you can’t, l
 
 🟩/🟥
 
-
 ## Securely using environment variables
 Let’s load your OpenAI API key (or any secret) using `dotenv`.
 
@@ -343,45 +347,46 @@ This allows you to use secrets without hardcoding them into scripts.
 
 ## Cluster Resources
 
-![DARC Cluster Resources](assets/images/darc-sep-2024.jpg)
+![DARC Cluster Resources](assets/images/yen-computing-infrastructure.png)
 
-✏️ Interactive Yens
+# ✏️ Interactive Yens
 
-![Sharing is Caring](assets/images/sharing-is-caring.jpeg)
+![Sharing is Caring](assets/images/sharing_is_caring.jpeg)
 
 Lets take a look at one of the interactive nodes. There are 5 interactive nodes (yen1-yen5), each with a large number of cores and RAM.
 
-- The Yens **Share** memory across all nodes on Yen Storage.
-   That means whenever you save something to your home folder on Yen1, you can access it from Yen2, Yen3, Yen4, or Yen5. Project folders are also shared across all nodes.
+- **Shared** storage across nodes
+All interactive Yen nodes (yen1–yen5) mount the same central storage system (ZFS-backed). Anything saved in your home directory on one node is immediately available on the others. Project directories are also mounted across all nodes
 
-! Can put image of yen1 here and progressively zoom out to show all 5 yens and then the whole cluster.
+- Per-node CPU and RAM
+Each interactive Yen node has its own [CPU cores and memory](https://rcpedia.stanford.edu/_getting_started/yen-servers/#overview-of-the-yen-computing-infrastructure). These resources are **shared** among all users logged into that node. If someone runs a resource-intensive job, it can affect the responsiveness for others.
 
-- The interactive Yens **Share** CPU and RAM across all users logged into that node.
-   This means that if one user is running a resource-intensive job on an interactive Yen node, it can affect the performance of other users on the same node.
+- Limitations there are limits on how many [CPU cores and how much RAM](https://rcpedia.stanford.edu/_policies/user_limits/#interactive-compute-limits) you can use at once on an interactive Yen node. This is to ensure fair access for all users.
 
-✏️ Yen-Slurm Cluster
+# ✏️ Yen-Slurm Cluster
 
-The Yen-Slurm has its own set of nodes that are separate from the interactive yens. These nodes are used to run batch jobs that you submit using the Slurm workload manager.
+The Yen-Slurm cluster has its own pool of compute nodes, separate from the interactive Yens. These nodes are dedicated to running batch jobs that you submit through the Slurm workload manager.
 
-Slurm is a method for managing and scheduling jobs on a cluster. It allows you to submit jobs that can run in the background, request specific resources (like CPU, memory, and time), and manage multiple jobs efficiently.
+Slurm is the scheduler that handles resource management and job execution on the cluster. It allows you to:
 
-Everyone **Shares** Yen-Slurm nodes but when you submit a job, you are allocated your own resources for the duration of the job.
+- Submit jobs that run in the background.
+- Request specific resources (CPU cores, memory, time).
+- Queue, monitor, and manage many jobs efficiently.
 
-- If you ask for 50 CPUs and 200GB of RAM for 24 hours, those resources are yours
-- If you ask for 512 CPU and 2TB of RAM for 24 hours, those resources are yours
-
-What is the catch? 
-
-
-In order to help you get the jobs you need done we offer a variety of slurm `partitions` (queues) that have different limits on resources and time.
-
-- normal: 512 CPUs, 3,000 GB RAM, max 2 days per job (2 hours default)
-- long: 50 CPUs, 3,000 GB RAM, max 7 days per job (2 hours default)
-- dev: 2 CPUs,  46 GB RAM, max 2 hours per job (1 hour default)
-- gpu: 64 CPUs,  250 GB RAM, max 1 day per job (2 hours default)
+While all users share access to the Yen-Slurm cluster, Slurm allocates dedicated resources for each job. This ensures that your job runs with the CPUs, memory, and time you requested, independent of other users’ workloads.
 
 
-✏️ Kitchen demo!
+- If you ask Slurm for 50 CPUs and 200 GB of RAM for 24 hours, those resources are reserved for your job.
+- If you ask for 512 CPUs and 2 TB of RAM for 24 hours, those resources are also reserved for your job.
+
+❓ What’s the catch?
+Slurm can only schedule your job if those resources are actually available. If you request more than the cluster can provide, or more than is free at the moment, your job will sit in the queue until the resources free up. Large jobs may wait a long time (or never run at all) if they [exceed policy limits or capacity](https://rcpedia.stanford.edu/_policies/user_limits/#interactive-compute-limits).
+
+
+In order to help you get the jobs you need done we offer a variety of slurm `partitions` (queues) that have different [limits on resources and time](https://rcpedia.stanford.edu/_policies/user_limits/#slurm-resource-limits).
+
+
+# ✏️ Kitchen demo!
 
 I need some volunteers to help me cook a meal.
 
