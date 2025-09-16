@@ -873,8 +873,9 @@ Notice that 100 independent jobs will be pending/running from one slurm script.
 After all of the tasks have finished, check outputs:
 
 ```
-ls results/array | head
-cat results/array/form3_row_42.json
+cd ../results
+ls array | head
+cat array/form3_row_42.json
 ```
 
 
