@@ -151,7 +151,7 @@ Let's use it and explore.
 ## 💻 Copy a repo with exercises 
 
 ```
-git clone https://github.com/gsbdarc/yens-onboarding-2025.git 
+cd && git clone https://github.com/gsbdarc/yens-onboarding-2025.git 
 ```
 
 Navigate to the `exercises` directory:
