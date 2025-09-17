@@ -366,7 +366,6 @@ You can now run code that uses packages from your environment. If you can’t, l
 
 ✏️ Let's pretend you are a cook.
 
-
 # ✏️ Interactive Yens
 
 ![Sharing is Caring](assets/images/sharing_is_caring.jpeg)
@@ -380,6 +379,12 @@ All interactive Yen nodes (yen1–yen5) mount the same central storage system (Z
 Each **interactive** Yen node has its own [CPU cores and memory](https://rcpedia.stanford.edu/_getting_started/yen-servers/#overview-of-the-yen-computing-infrastructure). These resources are **shared** among all users logged into that node. If someone runs a resource-intensive job, it can affect the responsiveness for others
 - Limitations: <br>
 There are limits on how many [CPU cores and how much RAM](https://rcpedia.stanford.edu/_policies/user_limits/#interactive-compute-limits) you can use at once on an interactive Yen node. This is to ensure fair access for all users.
+
+
+# ✏️ Kitchen demo!
+
+I need some volunteers to help me cook a meal.
+
 
 # ✏️ Yen-Slurm Cluster
 
@@ -402,11 +407,6 @@ Slurm can only schedule your job if those resources are actually available. If y
 
 
 In order to help you get the jobs you need done we offer a variety of slurm `partitions` (queues) that have different [limits on resources and time](https://rcpedia.stanford.edu/_policies/user_limits/#slurm-resource-limits).
-
-
-# ✏️ Kitchen demo!
-
-I need some volunteers to help me cook a meal.
 
 
 ## 💻 Run a mystery python script
