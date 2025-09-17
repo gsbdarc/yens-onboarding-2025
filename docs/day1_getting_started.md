@@ -125,7 +125,9 @@ These use one (or more) of the following approaches:
 * Providing a **relative path**, which depends on your working directory
 * Using a shortcut (`~`) or an **environment variable** (`$USER`)
 
-To invoke any software on the Yens, you have to either use its **path** directly, or it has to be in a special list of places. Let's look at this a little more.
+To invoke any software on the Yens, you have to either use its **path** directly, or it has to be in a special list of places. 
+
+Try out the following:
 
 1. Call `python3 -c "print(1+1)"` -- this sends a specific command to python3 and executes it.
 2. Find the absolute path of the python executable by typing `which python3`. List the contents of the directory that `python3` is in.
