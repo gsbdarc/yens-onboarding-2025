@@ -15,6 +15,7 @@ Many of the skills you learned in Yens Onboarding are not unique to the Yens clu
 - [Software Carpentry: The Unix Shell](https://swcarpentry.github.io/shell-novice/)  
 - [Software Carpentry: Version Control with Git](https://swcarpentry.github.io/git-novice/)  
 - [The Missing Semester of Your CS Education](https://missing.csail.mit.edu/) - different tools (vim, git, shell, etc)
+- [GSB Research Hub Training & Workshops](https://gsbresearchhub.stanford.edu/training-workshops/) - Hub How-Tos (deep dive into a technical topic such as LLM's and GSB data sources)  
 
 ---
 
