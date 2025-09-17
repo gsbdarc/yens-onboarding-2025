@@ -37,7 +37,8 @@ By the end of today you will be able to:
 > If you are a Mac or Linux user, you can use the native terminal for these exercises. 
 {: .important }
 
-> If you are a Windows user, you can use Git Bash to run these commands.
+> If you are a Windows user, you can use [PowerShell](https://learn.microsoft.com/en-us/powershell/scripting/windows-powershell/starting-windows-powershell?view=powershell-7.5)
+
 {: .important }
 
 To SSH from your terminal (replace `<SUNetID>` with your SUNet ID; don't type the `<`, `>` symbols):
